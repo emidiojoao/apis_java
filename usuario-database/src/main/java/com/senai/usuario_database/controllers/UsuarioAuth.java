@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/auth")
+@RequestMapping("/login")
 public class UsuarioAuth {
 
     @Autowired
@@ -21,7 +21,8 @@ public class UsuarioAuth {
     public String obterLogin(Model model){
 
         AutenticarUsuarioDto autenticarUsuarioDto = new AutenticarUsuarioDto();
-        model.addAttribute(" ", autenticarUsuarioDto);
+        //autenticarUsuarioDto.setLogin("joao@senai");
+        model.addAttribute("autenticarUsuarioDto", autenticarUsuarioDto);
 
         return "login";
     }
@@ -31,6 +32,6 @@ public class UsuarioAuth {
 
         System.out.println(dados.getLogin() + " " + dados.getSenha());
 
-        return "login";
+        return "redirect:/home";
     }
 }

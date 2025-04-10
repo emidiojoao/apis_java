@@ -30,15 +30,18 @@
     <div class="login-container bg-white">
         <h2 class="text-center mb-4">Login</h2>
 
-        <form th:action="@{/auth}" method="post" th:object="${autenticarUsuarioDto}">
+        <form th:action="@{/home}" method="post" th:object="${autenticarUsuarioDto}">
+
             <div class="mb-3">
                 <label for="mail" class="form-label">Usuário</label>
                 <input type="email" class="form-control" id="mail" th:field="*{login}" name="mail" required placeholder="Informe seu email aqui">
             </div>
+
             <div class="mb-3">
                 <label for="ps" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="ps" th:field="*{senha}" name="ps" required placeholder="Informe sua senha aqui">
             </div>
+
             <div class="d-grid mb-3">
                 <button type="submit" class="btn btn-lilas">Confirmar</button>
             </div>
