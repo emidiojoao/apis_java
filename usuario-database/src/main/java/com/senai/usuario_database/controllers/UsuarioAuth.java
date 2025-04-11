@@ -21,7 +21,6 @@ public class UsuarioAuth {
     public String obterLogin(Model model){
 
         AutenticarUsuarioDto autenticarUsuarioDto = new AutenticarUsuarioDto();
-        //autenticarUsuarioDto.setLogin("joao@senai");
         model.addAttribute("autenticarUsuarioDto", autenticarUsuarioDto);
 
         return "login";
@@ -32,6 +31,11 @@ public class UsuarioAuth {
 
         System.out.println(dados.getLogin() + " " + dados.getSenha());
 
-        return "redirect:/home";
+        MensagemDto mensagemDto = service.autenticarUsuario2(dados);
+
+        if(mensagemDto.getSucesso()){
+            return "redirect:/home";
+        }
+        return "redirect:/login?erro";
     }
 }

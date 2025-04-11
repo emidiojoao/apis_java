@@ -19,7 +19,8 @@ public class UsuarioService {
     public MensagemDto adicionarUsuario(RequisicaoDto requisicao){
         MensagemDto mensagem = new MensagemDto();
 
-        if(requisicao == null){
+        Optional<UsuarioModel> usuarioModel = repository.findByLogin(requisicao.getLogin());
+        if(usuarioModel.isPresent()){
             mensagem.setMensagem("[ERRO] ao cadastrar usuário");
             mensagem.setSucesso(false);
             return mensagem;
