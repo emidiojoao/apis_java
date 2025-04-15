@@ -101,6 +101,17 @@ public class UsuarioService {
         return resposta;
     }
 
+    public UsuarioAtualizarDto atualizarUsuarioPorId(Long id){
+
+        UsuarioAtualizarDto usuarioAtualizarDto = new UsuarioAtualizarDto();
+        usuarioAtualizarDto.setId(1L);
+        usuarioAtualizarDto.setNome("joão");
+        usuarioAtualizarDto.setLogin("joao@senai");
+
+        return usuarioAtualizarDto;
+
+    }
+
     public MensagemDto deletarUsuario(Long id){
 
         MensagemDto mensagem = new MensagemDto();

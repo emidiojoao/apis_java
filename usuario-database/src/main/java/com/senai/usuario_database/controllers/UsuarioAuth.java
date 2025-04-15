@@ -34,7 +34,7 @@ public class UsuarioAuth {
         MensagemDto mensagemDto = service.autenticarUsuario2(dados);
 
         if(mensagemDto.getSucesso()){
-            return "redirect:/home";
+            return "redirect:/home?sucesso";
         }
         return "redirect:/login?erro";
     }
