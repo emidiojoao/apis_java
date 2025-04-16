@@ -104,11 +104,20 @@ public class UsuarioService {
     public UsuarioAtualizarDto atualizarUsuarioPorId(Long id){
 
         UsuarioAtualizarDto usuarioAtualizarDto = new UsuarioAtualizarDto();
-        usuarioAtualizarDto.setId(1L);
-        usuarioAtualizarDto.setNome("joão");
-        usuarioAtualizarDto.setLogin("joao@senai");
 
-        return usuarioAtualizarDto;
+        Optional<UsuarioModel> buscarUsuario = repository.findById(id);
+        UsuarioModel usuarioModel = new UsuarioModel();
+        if(buscarUsuario.isPresent()){
+
+            usuarioAtualizarDto.setId(buscarUsuario.get().getId());
+            usuarioAtualizarDto.setNome(buscarUsuario.get().getNome());
+            usuarioAtualizarDto.setLogin(buscarUsuario.get().getLogin());
+            usuarioAtualizarDto.setSenha(buscarUsuario.get().getSenha());
+
+            return usuarioAtualizarDto;
+        }
+
+        return null;
 
     }
 
