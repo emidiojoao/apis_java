@@ -29,7 +29,7 @@ public class UsuarioAuth {
     @PostMapping
     public String autenticarUsuario(@ModelAttribute("autenticarUsuarioDto") AutenticarUsuarioDto dados){
 
-        System.out.println(dados.getLogin() + " " + dados.getSenha());
+        //System.out.println(dados.getLogin() + " " + dados.getSenha());
 
         MensagemDto mensagemDto = service.autenticarUsuario2(dados);
 

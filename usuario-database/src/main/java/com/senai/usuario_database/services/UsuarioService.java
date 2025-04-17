@@ -103,22 +103,27 @@ public class UsuarioService {
 
     public UsuarioAtualizarDto atualizarUsuarioPorId(Long id){
 
-        UsuarioAtualizarDto usuarioAtualizarDto = new UsuarioAtualizarDto();
+        //Opção 1 (simples)
+        //UsuarioAtualizarDto usuarioAtualizarDto = new UsuarioAtualizarDto();
+        //UsuarioModel usuarioModel = new UsuarioModel();
+
+        //usuarioAtualizarDto.setId(buscarUsuario.get().getId());
+        //usuarioAtualizarDto.setNome(buscarUsuario.get().getNome());
+        //usuarioAtualizarDto.setLogin(buscarUsuario.get().getLogin());
+        //usuarioAtualizarDto.setSenha(buscarUsuario.get().getSenha());
 
         Optional<UsuarioModel> buscarUsuario = repository.findById(id);
-        UsuarioModel usuarioModel = new UsuarioModel();
-        if(buscarUsuario.isPresent()){
 
-            usuarioAtualizarDto.setId(buscarUsuario.get().getId());
-            usuarioAtualizarDto.setNome(buscarUsuario.get().getNome());
-            usuarioAtualizarDto.setLogin(buscarUsuario.get().getLogin());
-            usuarioAtualizarDto.setSenha(buscarUsuario.get().getSenha());
-
-            return usuarioAtualizarDto;
+        if(buscarUsuario.isEmpty()){
+            return new UsuarioAtualizarDto();
         }
+        //
+        // Opção return 2 (complexo):
+        // return buscarUsuario.map(UsuarioAtualizarDto::new).orElseGet(UsuarioAtualizarDto::new);
 
-        return null;
 
+        //return usuarioAtualizarDto.of(buscarUsuario.get());
+        return new UsuarioAtualizarDto(buscarUsuario.get());
     }
 
     public MensagemDto deletarUsuario(Long id){
