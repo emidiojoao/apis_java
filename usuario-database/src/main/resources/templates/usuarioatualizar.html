@@ -49,7 +49,7 @@
         <a class="nav-link" th:href="@{/lista}">Usuário</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contato</a>
+        <a class="nav-link" href="#">Produto</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Cadastre-se</a>
@@ -69,26 +69,26 @@
     </div>
     <div class="card-body">
 
-      <form th:action="@{/usuarioAtualizar}" method="post" th:object="${usuarioAtualizarDto}">
+      <form th:action="@{'/crud/usuario/' + ${usuarioAtualizarDto.id}}" method="post" th:object="${usuarioAtualizarDto}">
 
         <div class="mb-3">
           <label for="user_id" class="form-label">Id</label>
-          <input type="text" class="form-control" id="user_id" th:field="*{id}" name="user_id" required>
+          <input type="text" class="form-control" id="user_id" th:field="*{id}" name="user_id" disabled>
         </div>
 
         <div class="mb-3">
           <label for="user_name" class="form-label">Nome</label>
-          <input type="text" class="form-control" id="user_name" th:field="*{nome}" name="nm" required placeholder="Informe seu nome aqui">
+          <input type="text" class="form-control" id="user_name" th:field="*{nome}" name="nm" placeholder="Informe seu nome aqui">
         </div>
 
         <div class="mb-3">
           <label for="mail" class="form-label">Email</label>
-          <input type="email" class="form-control" id="mail" th:field="*{login}" name="mail" required placeholder="Informe seu email aqui">
+          <input type="email" class="form-control" id="mail" th:field="*{login}" name="mail" placeholder="Informe seu email aqui">
         </div>
 
         <div class="mb-3">
           <label for="ps" class="form-label">Senha</label>
-          <input type="password" class="form-control" id="ps" th:field="*{senha}" name="ps" required placeholder="Informe sua senha aqui">
+          <input type="password" class="form-control" id="ps" th:field="*{senha}" name="ps" >
         </div>
 
         <div class="button-group">
@@ -97,6 +97,11 @@
         </div>
 
       </form>
+
+      <!-- url passando parametro -> "localhost:8080/login?erro"  -->
+      <div th:if="${param.erro}" class="alert alert-danger" role="alert">
+        <span class="mensagem">Erro ao atualizar o usuário!</span>
+      </div>
 
     </div>
   </div>

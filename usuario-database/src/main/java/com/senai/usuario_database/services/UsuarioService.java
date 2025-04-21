@@ -38,32 +38,42 @@ public class UsuarioService {
         return mensagem;
     }
 
-    public MensagemDto atualizarUsuario(Long id, RequisicaoDto requisicao){
-        MensagemDto mensagem = new MensagemDto();
+    public boolean atualizarUsuario(Long id, UsuarioAtualizarDto usuarioAtualizarDto){
 
-        //--verificar se existe o usuario
+        //--verificar se existe o usuario pelo id
         Optional<UsuarioModel> usuarioOptional = repository.findById(id);
 
-        //-- se não existe o usuáiro, então retorno com erro
-        if (!usuarioOptional.isPresent()){
-            mensagem.setSucesso(false);
-            mensagem.setMensagem("Erro, usuário não existe!");
-            return mensagem;
+        //--verificar se existe usuario com email
+        Optional<UsuarioModel> usuarioOptionalLogin = repository.findByLogin(usuarioAtualizarDto.getLogin());
+
+        //--se exister email cadastrado, retorna false
+        if(usuarioOptionalLogin.isPresent() && !usuarioOptionalLogin.get().getId().equals(id)){
+            return false;
         }
 
-        usuarioOptional.get().setNome(requisicao.getNome());
-        usuarioOptional.get().setLogin(requisicao.getLogin());
-        usuarioOptional.get().setSenha(requisicao.getSenha());
+        //--se o email for inexistente, setta as informações no model
+        if(usuarioOptional.isPresent()){
 
+            UsuarioModel usuarioModel = usuarioOptional.get();
 
-        //-- submeter ao repositorio o objeto
-        repository.save(usuarioOptional.get());
+            if(!usuarioAtualizarDto.getNome().isBlank()){
+                usuarioModel.setNome(usuarioAtualizarDto.getNome());
+            }
 
-        mensagem.setMensagem("Usuario atualizado com sucesso!");
-        mensagem.setSucesso(true);
+            if(!usuarioAtualizarDto.getLogin().isBlank()){
+                usuarioModel.setLogin(usuarioAtualizarDto.getLogin());
+            }
+            if(!usuarioAtualizarDto.getSenha().isBlank()){
+                usuarioModel.setSenha(usuarioAtualizarDto.getSenha());
+            }
 
-        return mensagem;
+        //-- persistir usuário no banco de dados
+        repository.save(usuarioModel);
+        return true;
     }
+
+        return false;
+        }
 
     public List<ConsultaUsuarioDto> listarUsuarios(){
 
@@ -103,26 +113,10 @@ public class UsuarioService {
 
     public UsuarioAtualizarDto atualizarUsuarioPorId(Long id){
 
-        //Opção 1 (simples)
-        //UsuarioAtualizarDto usuarioAtualizarDto = new UsuarioAtualizarDto();
-        //UsuarioModel usuarioModel = new UsuarioModel();
-
-        //usuarioAtualizarDto.setId(buscarUsuario.get().getId());
-        //usuarioAtualizarDto.setNome(buscarUsuario.get().getNome());
-        //usuarioAtualizarDto.setLogin(buscarUsuario.get().getLogin());
-        //usuarioAtualizarDto.setSenha(buscarUsuario.get().getSenha());
-
         Optional<UsuarioModel> buscarUsuario = repository.findById(id);
-
         if(buscarUsuario.isEmpty()){
             return new UsuarioAtualizarDto();
         }
-        //
-        // Opção return 2 (complexo):
-        // return buscarUsuario.map(UsuarioAtualizarDto::new).orElseGet(UsuarioAtualizarDto::new);
-
-
-        //return usuarioAtualizarDto.of(buscarUsuario.get());
         return new UsuarioAtualizarDto(buscarUsuario.get());
     }
 

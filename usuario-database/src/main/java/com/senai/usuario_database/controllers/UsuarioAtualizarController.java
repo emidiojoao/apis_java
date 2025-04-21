@@ -10,18 +10,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/usuarioAtualizar")
+@RequestMapping("/usuarioatualizar")
 public class UsuarioAtualizarController {
 
     @Autowired
     UsuarioService service;
 
     @GetMapping("/{id}")
-    public String obterCadastro(Model model, @PathVariable Long id){
+    public String obterUsuario(Model model, @PathVariable Long id){
 
         UsuarioAtualizarDto usuarioAtualizarDto = service.atualizarUsuarioPorId(id);
+
+        if(usuarioAtualizarDto.getId() == 0){
+            return "redirecta:/lista";
+        }
         model.addAttribute("usuarioAtualizarDto", usuarioAtualizarDto);
-        return "usuarioAtualizar";
+        return "usuarioatualizar";
     }
 
 

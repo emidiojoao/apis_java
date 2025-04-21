@@ -1,18 +1,16 @@
 package com.senai.usuario_database.controllers;
 
-import com.senai.usuario_database.dtos.ConsultaUsuarioDto;
-import com.senai.usuario_database.dtos.MensagemDto;
-import com.senai.usuario_database.dtos.RequisicaoDto;
-import com.senai.usuario_database.dtos.RespostaDto;
+import com.senai.usuario_database.dtos.*;
 import com.senai.usuario_database.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("crud")
+@Controller
+@RequestMapping("/crud")
 public class UsuarioController {
 
     @Autowired
@@ -29,29 +27,15 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/usuarios")
-    public ResponseEntity<List<ConsultaUsuarioDto>> listaUsuarios(){
-        List<ConsultaUsuarioDto> listaUsuario = service.listarUsuarios();
+    @PostMapping("/usuario/{id}")
+    public String atualizar(@ModelAttribute("usuarioAtualizarDto") UsuarioAtualizarDto usuarioAtualizarDto, @PathVariable Long id){
 
-        return ResponseEntity.ok().body(listaUsuario);
-    }
+        boolean retorno = service.atualizarUsuario(id, usuarioAtualizarDto);
 
-    @GetMapping("/usuario/{id}")
-    public ResponseEntity<RespostaDto> obterUsuarioPorId(@PathVariable Long id){
-        RespostaDto resposta = service.obterUsuarioPorId(id);
-        return ResponseEntity.ok().body(resposta);
-    }
-
-    @PutMapping("/usuario/{id}")
-    public ResponseEntity<MensagemDto> atualizar(@PathVariable Long id, @RequestBody RequisicaoDto dados){
-
-        MensagemDto mensagem = service.atualizarUsuario(id, dados);
-
-        //if(mensagem.getSucesso()){
-            return ResponseEntity.ok().body(mensagem);
-        //} else {
-           // return ResponseEntity.status(404).body(mensagem);
-        //}
+        if(retorno){
+            return "redirect:/lista";
+        }
+        return "redirect:/usuarioatualizar/" + id.toString() + "?erro";
     }
 
     @DeleteMapping("/usuario/{id}")

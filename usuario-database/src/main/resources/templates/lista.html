@@ -25,7 +25,7 @@
         <a class="nav-link" th:href="@{/lista}">Usuário</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Contato</a>
+        <a class="nav-link" href="#">Produto</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Cadastre-se</a>
@@ -66,7 +66,7 @@
             <td th:text="${usuario.id}"></td>
             <td th:text="${usuario.nome}"></td>
             <td th:text="${usuario.login}"></td>
-            <td><a th:href="@{'/usuarioAtualizar/' + ${usuario.id}}" class="btn btn-warning">Visualizar</a></td>
+            <td><a th:href="@{'/usuarioatualizar/' + ${usuario.id}}" class="btn btn-warning">Visualizar</a></td>
             <td><button th:data-usuario-id="${usuario.id}" class="excluir btn btn-danger">Excluir</<button></td>
           </tr>
           </tbody>
