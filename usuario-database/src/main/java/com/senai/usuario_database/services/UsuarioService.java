@@ -171,4 +171,16 @@ public class UsuarioService {
         mensagem.setSucesso(false);
         return mensagem;
     }
+
+    public ConsultaUsuarioDto buscarUsuarioPorId3(Long id) {
+        ConsultaUsuarioDto usuarioDTO = new ConsultaUsuarioDto();
+
+        Optional<UsuarioModel> usuarioModelIdPesquisado = repository.findById(id);
+
+        if(usuarioModelIdPesquisado.isEmpty()) {
+            return new ConsultaUsuarioDto(0L);
+        }
+
+        return usuarioDTO.of(usuarioModelIdPesquisado.get());
+    }
 }

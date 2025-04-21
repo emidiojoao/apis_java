@@ -19,7 +19,7 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Página Inicial</a>
+        <a class="nav-link" href="@{/home}">Página Inicial</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" th:href="@{/lista}">Usuário</a>
@@ -36,6 +36,21 @@
     <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Sair</button>
   </form>
 </nav>
+
+<!-- Corpo do conteúdo -->
+<div class="container mt-3">
+  <h1 class="mb-4 text-center">Search User by ID</h1>
+
+<form action="/lista" method="get" class="row g-3 mb-5 justify-content-center">
+  <div class="col-md-6">
+    <label for="user_list_filter" class="form-label">Filtrar por ID</label>
+    <input type="number" name="user_list_filter" id="user_list_filter" class="form-control" placeholder="Type user ID" />
+  </div>
+  <div class="col-md-auto align-self-end d-flex gap-2">
+    <button type="submit" class="btn btn-primary">Procurar</button>
+    <a href="/lista" class="btn btn-secondary">Limpar</a>
+  </div>
+</form>
 
 <div class="container mt-3">
 
@@ -74,7 +89,9 @@
       </div>
     </div>
   </div>
+ </div>
 </div>
+
 <!-- Fim conteúdo principal -->
 
 <!-- Inclua o script do excluir_usuario.js -->

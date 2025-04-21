@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +20,25 @@ public class ListaUsuarioController {
     UsuarioService service;
 
     @GetMapping
-    public String obterLista(Model model){
+    public String obterUserList(
+            @RequestParam(value = "user_list_filter", required = false) Long userId,
+            Model model) {
 
-        List<ConsultaUsuarioDto> listaUsuarioDto = service.listarUsuarios();
-        model.addAttribute("consultaUsuarioDto", listaUsuarioDto);
+        if (userId != null) {
+            // Se um ID foi fornecido, busca só esse usuário
+            List<ConsultaUsuarioDto> listUsersDTO = new ArrayList<>();
 
+            ConsultaUsuarioDto usuario = service.buscarUsuarioPorId3(userId);
+            if (usuario != null) {
+                listUsersDTO.add(usuario);
+            }
+
+            model.addAttribute("consultaUsuarioDto", listUsersDTO);
+        } else {
+            // Caso contrário, busca todos
+            List<ConsultaUsuarioDto> listUsersDTO = service.listarUsuarios();
+            model.addAttribute("consultaUsuarioDto", listUsersDTO);
+        }
 
         return "lista";
     }
