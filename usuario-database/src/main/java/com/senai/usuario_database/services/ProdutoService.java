@@ -38,24 +38,28 @@ public class ProdutoService {
     }
 
     //--Cria um novo produto
-    public Boolean criarProduto(ProdutoRequisicaoDto produtoDto){
+    public Boolean criarProduto(ProdutoRequisicaoDto produtoDto) {
 
-        //--Valida se nome de produto ja existe
-        Optional<ProdutoModel> obterProduto = repository.findByNome(produtoDto.getNome());
-        if(obterProduto.isPresent()){
-            return false;
+        try {
+            //--Valida se nome de produto ja existe
+            Optional<ProdutoModel> obterProduto = repository.findByNome(produtoDto.getNome());
+            if (obterProduto.isPresent()) {
+                return false;
+            }
+
+            ProdutoModel produtoModel = new ProdutoModel();
+
+            produtoModel.setNome(produtoDto.getNome());
+            produtoModel.setDescricao(produtoDto.getDescricao());
+            produtoModel.setPreco(produtoDto.getPreco());
+            produtoModel.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
+
+            repository.save(produtoModel);
+
+            return true;
+        } catch (IllegalArgumentException ex){
+            throw new RuntimeException("Erro ao salvar produto: " + ex.getMessage(),ex);
         }
-
-        ProdutoModel produtoModel = new ProdutoModel();
-
-        produtoModel.setNome(produtoDto.getNome());
-        produtoModel.setDescricao(produtoDto.getDescricao());
-        produtoModel.setPreco(produtoDto.getPreco());
-        produtoModel.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
-
-        repository.save(produtoModel);
-
-        return true;
     }
 
 }

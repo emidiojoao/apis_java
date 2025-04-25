@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProdutoModel {
 
     @Id
@@ -25,25 +26,26 @@ public class ProdutoModel {
 
     @Column(name = "quantidade_estoque", nullable = false)
     private Integer quantidadeEstoque;
-
-    public ProdutoModel(Long id, String nome, String descricao, Double preco, Integer quantidadeEstoque) {
-        setId(id);
-        setNome(nome);
-        setDescricao(descricao);
-        setPreco(preco);
-        setQuantidadeEstoque(quantidadeEstoque);
-    }
-
-    public void setPreco(Double preco) {
-        if(preco < 0.0){
-            throw new IllegalArgumentException("Preço não pode ser negativo.");
-        }
-        this.preco = preco;
-    }
-
-    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
-        if(quantidadeEstoque < 0)
-            throw new IllegalArgumentException("O estoque não pode ser negativo.");
-        this.quantidadeEstoque = quantidadeEstoque;
-    }
+//
+//    public ProdutoModel(Long id, String nome, String descricao, Double preco, Integer quantidadeEstoque) {
+//        setId(id);
+//        setNome(nome);
+//        setDescricao(descricao);
+//        setPreco(preco);
+//        setQuantidadeEstoque(quantidadeEstoque);
+//    }
+//
+//    public void setPreco(Double preco) {
+////        if(preco < 0.0){
+////            throw new IllegalArgumentException("Preço não pode ser negativo.");
+////        }
+//        this.preco = preco;
+//    }
+//
+//    public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+////        if(quantidadeEstoque < 0) {
+////            throw new IllegalArgumentException("O estoque não pode ser negativo.");
+////        }
+//        this.quantidadeEstoque = quantidadeEstoque;
+//    }
 }
