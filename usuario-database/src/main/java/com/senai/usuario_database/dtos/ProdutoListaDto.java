@@ -2,10 +2,12 @@ package com.senai.usuario_database.dtos;
 
 import com.senai.usuario_database.models.ProdutoModel;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class ProdutoListaDto {
 
     private Long id;

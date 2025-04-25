@@ -19,6 +19,7 @@ public class ProdutoService {
     @Autowired
     ProdutoRepository repository;
 
+    //--Lista todos os produtos
     public List<ProdutoListaDto> listarProdutos(){
 
         List<ProdutoListaDto> listaProdutoDto = new ArrayList<>();
@@ -26,33 +27,35 @@ public class ProdutoService {
 
         for(ProdutoModel produtoModel : listaProdutoModel){
             ProdutoListaDto produtoDto = new ProdutoListaDto();
-            produtoDto.setId(produtoDto.getId());
-            produtoDto.setNome(produtoDto.getNome());
-            produtoDto.setPreco(produtoDto.getPreco());
-            produtoDto.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
+            produtoDto.setId(produtoModel.getId());
+            produtoDto.setNome(produtoModel.getNome());
+            produtoDto.setPreco(produtoModel.getPreco());
+            produtoDto.setQuantidadeEstoque(produtoModel.getQuantidadeEstoque());
+
             listaProdutoDto.add(produtoDto);
         }
         return listaProdutoDto;
     }
 
-    public MensagemDto criarProduto(ProdutoRequisicaoDto produtoDto){
-        MensagemDto mensagem =  new MensagemDto();
+    //--Cria um novo produto
+    public Boolean criarProduto(ProdutoRequisicaoDto produtoDto){
 
+        //--Valida se nome de produto ja existe
         Optional<ProdutoModel> obterProduto = repository.findByNome(produtoDto.getNome());
         if(obterProduto.isPresent()){
-            mensagem.setSucesso(false);
-            return mensagem;
+            return false;
         }
 
         ProdutoModel produtoModel = new ProdutoModel();
 
-        produtoModel.setId(produtoDto.getId());
         produtoModel.setNome(produtoDto.getNome());
         produtoModel.setDescricao(produtoDto.getDescricao());
         produtoModel.setPreco(produtoDto.getPreco());
         produtoModel.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
 
-        return mensagem;
+        repository.save(produtoModel);
+
+        return true;
     }
 
 }
