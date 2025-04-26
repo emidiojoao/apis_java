@@ -1,6 +1,7 @@
 package com.senai.usuario_database.services;
 
 import com.senai.usuario_database.dtos.MensagemDto;
+import com.senai.usuario_database.dtos.ProdutoDto;
 import com.senai.usuario_database.dtos.ProdutoListaDto;
 import com.senai.usuario_database.dtos.ProdutoRequisicaoDto;
 import com.senai.usuario_database.models.ProdutoModel;
@@ -40,7 +41,7 @@ public class ProdutoService {
     //--Cria um novo produto
     public Boolean criarProduto(ProdutoRequisicaoDto produtoDto) {
 
-        try {
+//        try {
             //--Valida se nome de produto ja existe
             Optional<ProdutoModel> obterProduto = repository.findByNome(produtoDto.getNome());
             if (obterProduto.isPresent()) {
@@ -57,9 +58,39 @@ public class ProdutoService {
             repository.save(produtoModel);
 
             return true;
-        } catch (IllegalArgumentException ex){
-            throw new RuntimeException("Erro ao salvar produto: " + ex.getMessage(),ex);
+//        } catch (IllegalArgumentException ex){
+//            throw new RuntimeException("Erro ao salvar produto: " + ex.getMessage(),ex);
+//        }
+    }
+
+    public ProdutoDto obterProdutoPorId(Long id){
+
+        Optional<ProdutoModel> produtoModel = repository.findById(id);
+
+        if(produtoModel.isEmpty()){
+            return new ProdutoDto();
         }
+
+        return ProdutoDto.of(produtoModel.get());
+    }
+
+    public Boolean atualizarProduto(Long id, ProdutoDto produtoDto){
+
+        Optional<ProdutoModel> produtoModel = repository.findById(id);
+
+        if(produtoModel.isEmpty()){
+            return false;
+        }
+
+        ProdutoModel model = produtoModel.get();
+        model.setId(produtoDto.getId());
+        model.setNome(produtoDto.getNome());
+        model.setDescricao(produtoDto.getDescricao());
+        model.setPreco(produtoDto.getPreco());
+        model.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
+
+        repository.save(model);
+        return true;
     }
 
 }

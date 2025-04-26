@@ -16,7 +16,7 @@ public class ProdutoRespostaDto {
     private Double preco;
     private Integer quantidadeEstoque;
 
-    public ProdutoRespostaDto of(ProdutoModel produto){
+    public static ProdutoRespostaDto of(ProdutoModel produto){
         ProdutoRespostaDto produtoRespostaDto = new ProdutoRespostaDto();
 
         produtoRespostaDto.setId(produto.getId());

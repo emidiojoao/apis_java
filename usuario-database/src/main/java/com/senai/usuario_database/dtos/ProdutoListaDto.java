@@ -15,7 +15,7 @@ public class ProdutoListaDto {
     private Double preco;
     private Integer quantidadeEstoque;
 
-    public ProdutoListaDto of(ProdutoModel produto){
+    public static ProdutoListaDto of(ProdutoModel produto){
         ProdutoListaDto produtoListaDto = new ProdutoListaDto();
         produtoListaDto.setId(produto.getId());
         produtoListaDto.setNome(produto.getNome());

@@ -8,15 +8,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class ProdutoRequisicaoDto {
+public class ProdutoDto {
 
+    private Long id;
     private String nome;
     private String descricao;
     private Double preco;
     private Integer quantidadeEstoque;
 
-    public static ProdutoRequisicaoDto of(ProdutoModel model){
-        ProdutoRequisicaoDto produto = new ProdutoRequisicaoDto();
+    public static ProdutoDto of(ProdutoModel model){
+        ProdutoDto produto = new ProdutoDto();
+        produto.setId(model.getId());
         produto.setNome(model.getNome());
         produto.setDescricao(model.getDescricao());
         produto.setPreco(model.getPreco());

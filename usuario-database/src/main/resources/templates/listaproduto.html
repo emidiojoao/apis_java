@@ -58,7 +58,7 @@
             <tr th:each="produto : ${produtoListaDto}">
                 <td>
                     <div class="d-flex justify-content-center gap-2">
-                        <a th:href="@{'/listaprodutos/' + ${produto.id}}" class="btn btn-primary">Atualizar</a>
+                        <a th:href="@{'/atualizar-produto/' + ${produto.id}}" class="btn btn-primary">Atualizar</a>
                         <a th:data-produto-id="${produto.id}" class="delete btn btn-danger">Deletar</a>
                     </div>
                 </td>
@@ -71,7 +71,7 @@
 
             <!-- url passando parametro -> "localhost:8080/login?erro"  -->
             <div th:if="${param.erro}" class="alert alert-danger" role="alert">
-                <span class="mensagem">Erro ao realizar cadastro do produto!</span>
+                <span class="mensagem">Erro ao realizar cadastro/atualizacao do produto!</span>
             </div>
 
         </table>
