@@ -1,32 +1,32 @@
 package com.senai.usuario_database.controllers;
 
+import com.senai.usuario_database.dtos.MensagemDto;
 import com.senai.usuario_database.dtos.ProdutoListaDto;
 import com.senai.usuario_database.dtos.ProdutoRequisicaoDto;
 import com.senai.usuario_database.services.ProdutoService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/crud/produto")
+@RequestMapping("produtodeletar")
 public class ProdutoController {
 
     @Autowired
     ProdutoService service;
 
-    @GetMapping("/produtos")
-    public List<ProdutoListaDto> listarProduto(){
-        return service.listarProdutos();
-    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deletarProduto(@PathVariable Long id){
 
-    @PostMapping
-    public Boolean cadastrarProduto(@RequestBody ProdutoRequisicaoDto produtoRequisicaoDto){
-        return service.criarProduto(produtoRequisicaoDto);
+        Boolean retorno = service.deletarProduto(id);
+
+        if(retorno){
+            return ResponseEntity.ok().body(true);
+        }
+        return ResponseEntity.status(404).body(false);
     }
 }

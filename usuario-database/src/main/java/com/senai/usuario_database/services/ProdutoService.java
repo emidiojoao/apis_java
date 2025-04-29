@@ -52,6 +52,10 @@ public class ProdutoService {
 
             produtoModel.setNome(produtoDto.getNome());
             produtoModel.setDescricao(produtoDto.getDescricao());
+
+            if(produtoDto.getPreco() <= 0 || produtoDto.getQuantidadeEstoque() <= 0) {
+                return false;
+            }
             produtoModel.setPreco(produtoDto.getPreco());
             produtoModel.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
 
@@ -90,6 +94,18 @@ public class ProdutoService {
         model.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
 
         repository.save(model);
+        return true;
+    }
+
+    public Boolean deletarProduto(Long id){
+
+        Optional<ProdutoModel> produtoModel = repository.findById(id);
+
+        if(produtoModel.isEmpty()){
+            return false;
+        }
+
+        repository.delete(produtoModel.get());
         return true;
     }
 

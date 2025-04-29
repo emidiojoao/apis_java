@@ -39,9 +39,23 @@
     </form>
 </nav>
 
+<!--
+<div class="container mt-3">
+    <h1 class="mb-4 text-center">Filtrar produto por ID</h1>
+
+    <form action="/listaproduto" method="get" class="row g-3 mb-5 justify-content-center">
+        <div class="col-md-6">
+            <label for="user_list_filter" class="form-label">Filtrar por ID</label>
+            <input type="number" name="user_list_filter" id="user_list_filter" class="form-control" placeholder="Type user ID" />
+        </div>
+        <div class="col-md-auto align-self-end d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Procurar</button>
+            <a href="/listaproduto" class="btn btn-secondary">Limpar</a>
+        </div> -->
+
 <!-- Content -->
 <div class="container mt-3">
-    <h1 class="mb-4 text-center">Product List</h1>
+    <h1 class="mb-4 text-center">Lista Produtos</h1>
 
     <div class="table-responsive">
         <table class="table table-bordered table-hover align-middle text-center">
@@ -59,7 +73,7 @@
                 <td>
                     <div class="d-flex justify-content-center gap-2">
                         <a th:href="@{'/atualizar-produto/' + ${produto.id}}" class="btn btn-primary">Atualizar</a>
-                        <a th:data-produto-id="${produto.id}" class="delete btn btn-danger">Deletar</a>
+                        <a th:data-produto-id="${produto.id}" class="excluir-produto btn btn-danger">Deletar</a>
                     </div>
                 </td>
                 <td th:text="${produto.id}"></td>

@@ -1,6 +1,7 @@
 package com.senai.usuario_database.controllers;
 
 import com.senai.usuario_database.dtos.ConsultaUsuarioDto;
+import com.senai.usuario_database.dtos.ProdutoDto;
 import com.senai.usuario_database.dtos.ProdutoListaDto;
 import com.senai.usuario_database.services.ProdutoService;
 import com.senai.usuario_database.services.UsuarioService;
@@ -29,7 +30,7 @@ public class ProdutoListaController {
 
         return "listaproduto";
     }
-//
+
 //    @GetMapping
 //    public String obterListaProduto(
 //            @RequestParam(value = "product_list_filter", required = false) Long produtoId,
@@ -37,21 +38,21 @@ public class ProdutoListaController {
 //
 //        if (produtoId != null) {
 //            // Se um ID foi fornecido, busca só esse usuário
-//            List<ConsultaUsuarioDto> listUsersDTO = new ArrayList<>();
+//            List<ProdutoDto> produtoDto = new ArrayList<>();
 //
-//            ConsultaUsuarioDto usuario = service.buscarUsuarioPorId3(userId);
-//            if (usuario != null) {
-//                listUsersDTO.add(usuario);
+//            ProdutoDto produto = service.obterProdutoPorId(produtoId);
+//            if (produto != null) {
+//                produtoDto.add(produto);
 //            }
 //
-//            model.addAttribute("consultaUsuarioDto", listUsersDTO);
+//            model.addAttribute("produtoDto", produtoDto);
 //        } else {
 //            // Caso contrário, busca todos
-//            List<ConsultaUsuarioDto> listUsersDTO = service.listarUsuarios();
-//            model.addAttribute("consultaUsuarioDto", listUsersDTO);
+//            List<ProdutoDto> listaProdutoDto = service.listarProdutos();
+//            model.addAttribute("produtoDto", listaProdutoDto);
 //        }
 //
-//        return "lista";
+//        return "listaproduto";
 //    }
 
 
