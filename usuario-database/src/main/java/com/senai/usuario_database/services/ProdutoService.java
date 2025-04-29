@@ -90,6 +90,10 @@ public class ProdutoService {
         model.setId(produtoDto.getId());
         model.setNome(produtoDto.getNome());
         model.setDescricao(produtoDto.getDescricao());
+
+        if(produtoDto.getPreco() <= 0 || produtoDto.getQuantidadeEstoque() <= 0){
+            return false;
+        }
         model.setPreco(produtoDto.getPreco());
         model.setQuantidadeEstoque(produtoDto.getQuantidadeEstoque());
 
