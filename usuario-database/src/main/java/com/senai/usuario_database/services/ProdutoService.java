@@ -80,13 +80,21 @@ public class ProdutoService {
 
     public Boolean atualizarProduto(Long id, ProdutoDto produtoDto){
 
-        Optional<ProdutoModel> produtoModel = repository.findById(id);
+        Optional<ProdutoModel> buscarProdutoPeloId = repository.findById(id);
+        
+        Optional<ProdutoModel> buscarProdutoPeloNome = repository.findByNome(produtoDto.getNome());
 
-        if(produtoModel.isEmpty()){
+        if(buscarProdutoPeloId.isEmpty()){
             return false;
         }
 
-        ProdutoModel model = produtoModel.get();
+        if(buscarProdutoPeloNome.isPresent()){
+            if(buscarProdutoPeloNome.get().getNome().equals(produtoDto.getNome())){
+                return false;
+            }
+        }
+
+        ProdutoModel model = buscarProdutoPeloId.get();
         model.setId(produtoDto.getId());
         model.setNome(produtoDto.getNome());
         model.setDescricao(produtoDto.getDescricao());
