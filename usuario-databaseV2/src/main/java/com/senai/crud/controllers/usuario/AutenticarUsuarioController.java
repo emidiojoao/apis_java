@@ -34,6 +34,6 @@ public class AutenticarUsuarioController {
         if(resultado){
             return "redirect:/home?sucesso";
         }
-        return "redicect:/login?erro";
+        return "redirect:/login?erro";
     }
 }
