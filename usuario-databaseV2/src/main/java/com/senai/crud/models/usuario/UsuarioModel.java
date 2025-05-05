@@ -1,11 +1,14 @@
 package com.senai.crud.models.usuario;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Table(name = "usuario")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class UsuarioModel {
 
     @Id

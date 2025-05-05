@@ -27,7 +27,7 @@ public class AutenticarUsuarioController {
     }
 
     @PostMapping
-    public String autenticarUsuario(@ModelAttribute("autenciarUsuarioDto") AutenticarUsuarioDto dados){
+    public String autenticarUsuario(@ModelAttribute("autenticarUsuarioDto") AutenticarUsuarioDto dados){
 
         Boolean resultado = service.autenticarUsuario(dados);
 
