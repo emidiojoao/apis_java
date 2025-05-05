@@ -32,8 +32,8 @@ public class AutenticarUsuarioController {
         Boolean resultado = service.autenticarUsuario(dados);
 
         if(resultado){
-            return "redirect:/(criar html)";
+            return "redirect:/home?sucesso";
         }
-        return "redicect:/login(erro)";
+        return "redicect:/login?erro";
     }
 }
