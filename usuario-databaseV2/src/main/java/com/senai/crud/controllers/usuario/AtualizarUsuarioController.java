@@ -14,16 +14,24 @@ public class AtualizarUsuarioController {
     @Autowired
     UsuarioService service;
 
-    @GetMapping
+    @GetMapping("/{id}")
     public String obterUsuario(Model model, @PathVariable Long id){
 
-        AtualizarUsuarioDto atualizarUsuarioDto = service.atualizarUsuario(id);
+        AtualizarUsuarioDto atualizarUsuarioDto = service.atualizarUsuarioPorId(id);
 
         model.addAttribute("usuarioAtualizarDto", atualizarUsuarioDto);
         return "atualizarusuario";
     }
 
     @PostMapping("/{id}")
-    public String atualizarUsuario(@ModelAttribute("usuarioAtualizarDto") AtualizarUsuarioDto usu)
+    public String atualizarUsuario(@PathVariable Long id, @ModelAttribute("usuarioAtualizarDto") AtualizarUsuarioDto usuarioDto){
+
+        Boolean sucesso = service.atualizarUsuario(id, usuarioDto);
+
+        if(sucesso){
+            return "redirect:/listausuario";
+        }
+        return "redirect:/listausuario?erro";
+    }
 
 }

@@ -71,7 +71,7 @@
         </div>
         <div class="card-body">
 
-            <form th:action="@{'/crud/usuario/' + ${usuarioAtualizarDto.id}}" method="post" th:object="${usuarioAtualizarDto}">
+            <form th:action="@{'/usuarioatualizar/' + ${usuarioAtualizarDto.id}}" method="post" th:object="${usuarioAtualizarDto}">
 
                 <div class="mb-3">
                     <label for="user_id" class="form-label">Id</label>
@@ -85,7 +85,7 @@
 
                 <div class="mb-3">
                     <label for="mail" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="mail" th:field="*{login}" name="mail" placeholder="Informe seu email aqui">
+                    <input type="email" class="form-control" id="mail" th:field="*{email}" name="mail" placeholder="Informe seu email aqui">
                 </div>
 
                 <div class="mb-3">
@@ -94,8 +94,8 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="submit" class="btn btn-lilas">Atualizar</button>
-                    <a th:href="@{~/lista}" class="btn btn-secondary">Fechar</a>
+                    <button type="submit" class="btn btn-primary">Atualizar</button>
+                    <a th:href="@{~/listausuario}" class="btn btn-secondary">Cancelar</a>
                 </div>
 
             </form>
@@ -110,8 +110,8 @@
 </div>
 <!-- Fim conteúdo principal -->
 
-<!-- Inclua o script do script.js -->
-<script src="/excluir_usuario.js"></script>
+<!-- Inclua o script do script.js
+<script src="/excluir_usuario.js"></script>-->
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

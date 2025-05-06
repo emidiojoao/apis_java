@@ -1,5 +1,6 @@
 package com.senai.crud.services.usuario;
 
+import com.senai.crud.controllers.usuario.AtualizarUsuarioController;
 import com.senai.crud.dtos.usuario.AtualizarUsuarioDto;
 import com.senai.crud.dtos.usuario.AutenticarUsuarioDto;
 import com.senai.crud.dtos.usuario.ListaUsuarioDto;
@@ -65,8 +66,8 @@ public class UsuarioService {
         return false;
     }
 
-    //--Atualizar Usuário
-    public AtualizarUsuarioDto atualizarUsuario(Long id){
+    //--Atualizar Usuário por id
+    public AtualizarUsuarioDto atualizarUsuarioPorId(Long id){
 
         Optional<UsuarioModel> buscarUsuario = repository.findById(id);
         if(buscarUsuario.isEmpty()){
@@ -74,6 +75,35 @@ public class UsuarioService {
         }
 
         return new AtualizarUsuarioDto(buscarUsuario.get());
+    }
+
+    //--Atualizar usuário
+    public Boolean atualizarUsuario(Long id, AtualizarUsuarioDto atualizarUsuarioDto){
+
+        Optional<UsuarioModel> usuarioOptional = repository.findById(id);
+        if(usuarioOptional.isEmpty()){
+            return false;
+        }
+
+        Optional<UsuarioModel> usuarioOptionalEmail = repository.findByEmail(atualizarUsuarioDto.getEmail());
+        if(usuarioOptionalEmail.isPresent() && !usuarioOptionalEmail.get().getId().equals(id)){
+            return false;
+        }
+
+        UsuarioModel usuarioModel = usuarioOptional.get();
+
+        if(!atualizarUsuarioDto.getNome().isBlank()){
+            usuarioModel.setNome(atualizarUsuarioDto.getNome());
+        }
+        if(!atualizarUsuarioDto.getEmail().isBlank()){
+            usuarioModel.setEmail(atualizarUsuarioDto.getEmail());
+        }
+        if(!atualizarUsuarioDto.getSenha().isBlank()){
+            usuarioModel.setSenha(atualizarUsuarioDto.getSenha());
+        }
+
+        repository.save(usuarioModel);
+        return true;
     }
 
     //--Excluir Usuário
