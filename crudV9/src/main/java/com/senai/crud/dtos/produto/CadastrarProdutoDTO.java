@@ -1,30 +1,20 @@
-package com.senai.crud.dtos;
+package com.senai.crud.dtos.produto;
 
-public class ObterProdutoDTO {
+public class CadastrarProdutoDTO {
 
-    private Long id;
     private String nome;
     private String descricao;
     private Double preco;
     private Integer quantidade;
 
-    public ObterProdutoDTO() {
+    public CadastrarProdutoDTO() {
     }
 
-    public ObterProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade) {
-        this.id = id;
+    public CadastrarProdutoDTO(String nome, String descricao, Double preco, Integer quantidade) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.quantidade = quantidade;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {

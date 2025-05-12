@@ -1,13 +1,12 @@
-package com.senai.crud.dtos;
+package com.senai.crud.dtos.usuario;
 
-public class ResponseDto {
+public class ListarUsuarioDTO {
 
     private Long id;
     private String nome;
     private String login;
-    private String senha;
 
-    public ResponseDto() {
+    public ListarUsuarioDTO() {
     }
 
     public Long getId() {
@@ -33,13 +32,4 @@ public class ResponseDto {
     public void setLogin(String login) {
         this.login = login;
     }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
 }

@@ -17,14 +17,14 @@ public class AuthController {
     @GetMapping
     public String obterLogin(Model model){
 
-        LoginDto loginDto = new LoginDto();
+        LoginDTO loginDto = new LoginDTO();
         model.addAttribute("loginDto",loginDto);
 
         return "login";
     }
 
     @PostMapping
-    public String login(@ModelAttribute("loginDto") LoginDto login){
+    public String login(@ModelAttribute("loginDto") LoginDTO login){
 
         System.out.println(login.getLogin() + " " + login.getSenha());
 

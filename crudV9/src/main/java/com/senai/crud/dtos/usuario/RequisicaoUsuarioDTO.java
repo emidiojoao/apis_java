@@ -1,17 +1,21 @@
-package com.senai.crud.dtos;
+package com.senai.crud.dtos.usuario;
 
-public class LoginDto {
+public class RequisicaoUsuarioDTO {
 
+
+    private String nome;
     private String login;
-
     private String senha;
 
-    public LoginDto() {
+    public RequisicaoUsuarioDTO() {
     }
 
-    public LoginDto(String login, String senha) {
-        this.login = login;
-        this.senha = senha;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getLogin() {

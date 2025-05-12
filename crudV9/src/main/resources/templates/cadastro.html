@@ -1,7 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <!-- Define codificação UTF-8 e viewport responsivo para adaptação em dispositivos móveis -->
@@ -47,7 +46,7 @@
 
                         <!-- Adiciona uma margem inferior de 1rem (16px) ao elemento -->
                         <div class="mb-3">
-                            <label for="user_name" class="form-label">E-mail</label>
+                            <label for="user_name" class="form-label">Nome</label>
                             <input type="text" class="form-control" th:field="*{nome}" id="user_name" name="user_name" placeholder="João da Silva" required/>
                         </div>
 

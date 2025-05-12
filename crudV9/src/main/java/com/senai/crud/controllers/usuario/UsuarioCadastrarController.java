@@ -1,7 +1,7 @@
 package com.senai.crud.controllers.usuario;
 
 import com.senai.crud.dtos.MensagemDto;
-import com.senai.crud.dtos.RequestDto;
+import com.senai.crud.dtos.usuario.RequisicaoUsuarioDTO;
 import com.senai.crud.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/cadastro")
-public class UsuarioCadastroController {
+public class UsuarioCadastrarController {
 
     @Autowired
     UsuarioService service;
@@ -21,14 +21,14 @@ public class UsuarioCadastroController {
     @GetMapping
     public String obterCadastro(Model model){
 
-        RequestDto cadastroDto = new RequestDto();
+        RequisicaoUsuarioDTO cadastroDto = new RequisicaoUsuarioDTO();
         model.addAttribute("cadastroDto",cadastroDto);
 
         return "cadastro";
     }
 
     @PostMapping
-    public String realizarCadastro(@ModelAttribute("cadastroDto") RequestDto cadastroDto){
+    public String realizarCadastro(@ModelAttribute("cadastroDto") RequisicaoUsuarioDTO cadastroDto){
 
         MensagemDto messagem = service.adicionarUsuario(cadastroDto);
 

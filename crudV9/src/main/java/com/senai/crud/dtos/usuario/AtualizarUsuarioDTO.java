@@ -1,30 +1,30 @@
-package com.senai.crud.dtos;
+package com.senai.crud.dtos.usuario;
 
 import com.senai.crud.models.UsuarioModel;
 
-public class UsuarioAtualizarDto {
+public class AtualizarUsuarioDTO {
 
     private Long id;
     private String nome;
     private String login;
     private String senha;
 
-    public UsuarioAtualizarDto() {
+    public AtualizarUsuarioDTO() {
     }
 
-    public UsuarioAtualizarDto(Long id) {
+    public AtualizarUsuarioDTO(Long id) {
         this.id = id;
     }
 
     //--Construtura criado para receber um Model na hora de criação de um DTO
-    public UsuarioAtualizarDto(UsuarioModel usuario) {
+    public AtualizarUsuarioDTO(UsuarioModel usuario) {
         this.id = usuario.getId();
         this.nome = usuario.getNome();
         this.login = usuario.getLogin();
         this.senha = usuario.getSenha();
     }
 
-    public UsuarioAtualizarDto(Long id, String nome, String login, String senha) {
+    public AtualizarUsuarioDTO(Long id, String nome, String login, String senha) {
         this.id = id;
         this.nome = nome;
         this.login = login;

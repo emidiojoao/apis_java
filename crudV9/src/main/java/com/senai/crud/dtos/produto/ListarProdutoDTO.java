@@ -1,21 +1,21 @@
-package com.senai.crud.dtos;
+package com.senai.crud.dtos.produto;
 
-public class AtualizarProdutoDTO {
+public class ListarProdutoDTO {
 
     private Long id;
     private String nome;
     private String descricao;
-    private Double preco;
-    private Integer quantidade;
+    private double Preco;
+    private int quantidade;
 
-    public AtualizarProdutoDTO() {
+    public ListarProdutoDTO() {
     }
 
-    public AtualizarProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade) {
+    public ListarProdutoDTO(Long id, String nome, String descricao, double preco, int quantidade) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
-        this.preco = preco;
+        Preco = preco;
         this.quantidade = quantidade;
     }
 
@@ -43,19 +43,19 @@ public class AtualizarProdutoDTO {
         this.descricao = descricao;
     }
 
-    public Double getPreco() {
-        return preco;
+    public double getPreco() {
+        return Preco;
     }
 
-    public void setPreco(Double preco) {
-        this.preco = preco;
+    public void setPreco(double preco) {
+        Preco = preco;
     }
 
-    public Integer getQuantidade() {
+    public int getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
     }
 }

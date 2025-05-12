@@ -1,7 +1,7 @@
 package com.senai.crud.controllers.produto;
 
-import com.senai.crud.dtos.AtualizarProdutoDTO;
-import com.senai.crud.dtos.ObterProdutoDTO;
+import com.senai.crud.dtos.produto.AtualizarProdutoDTO;
+import com.senai.crud.dtos.produto.ObterProdutoDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class ProdutoAtualizarController {
         try {
 
             service.atualizarProduto(id, atualizarProdutoDTO);
-            return "redirect:/produtolista?sucesso";
+            return "redirect:/lista-produto?sucesso";
         } catch (InvalidOperationException ex) {
             redirectAttributes.addFlashAttribute("erro", ex.getMessage());
             return "redirect:/atualizar-produto/" + id;

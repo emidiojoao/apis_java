@@ -1,6 +1,6 @@
 package com.senai.crud.controllers.produto;
 
-import com.senai.crud.dtos.ProdutoDto;
+import com.senai.crud.dtos.produto.CadastrarProdutoDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("cadastro-produto")
-public class ProdutoCadastroController {
+public class ProdutoCadastrarController {
 
     @Autowired
     ProdutoService service;
@@ -23,18 +23,18 @@ public class ProdutoCadastroController {
     @GetMapping
     public String obterCadastro(Model model){
 
-        ProdutoDto produtoDto = new ProdutoDto();
-        model.addAttribute("produtoDto", produtoDto);
+        CadastrarProdutoDTO cadastrarProdutoDTO = new CadastrarProdutoDTO();
+        model.addAttribute("cadastrarProdutoDTO", cadastrarProdutoDTO);
 
         return "produtocadastro";
     }
 
     @PostMapping
-    public String cadastrarProduto(@ModelAttribute("produtoDto") ProdutoDto produtoDto, RedirectAttributes redirectAttributes){
+    public String cadastrarProduto(@ModelAttribute("cadastrarProdutoDTO") CadastrarProdutoDTO cadastrarProdutoDTO, RedirectAttributes redirectAttributes){
 
         try {
-            service.cadastrarProduto(produtoDto);
-            return "redirect:/produtolista?sucesso";
+            service.cadastrarProduto(cadastrarProdutoDTO);
+            return "redirect:/lista-produto?sucesso";
         } catch (InvalidOperationException ex) {
             redirectAttributes.addFlashAttribute("erro", ex.getMessage());
             return "redirect:/cadastro-produto";

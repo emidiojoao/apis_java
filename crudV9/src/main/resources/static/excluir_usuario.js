@@ -10,7 +10,7 @@ document.querySelectorAll('.excluir').forEach(function(button) {
             const usuarioId = this.dataset.usuarioId;
 
             // Realize a chamada AJAX para excluir o recurso
-            fetch(`/usuario/${usuarioId}`, {
+            fetch(`/deletar-usuario/${usuarioId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

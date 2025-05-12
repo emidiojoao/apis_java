@@ -1,6 +1,6 @@
 package com.senai.crud.controllers.usuario;
 
-import com.senai.crud.dtos.ListaUsuariosDto;
+import com.senai.crud.dtos.usuario.ListarUsuarioDTO;
 import com.senai.crud.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/usuario")
 public class UsuarioListaController {
 
     @Autowired
     UsuarioService service;
 
-    @GetMapping("/usuariolista")
+    @GetMapping("/lista-usuario")
     public String obterUsuarioLista(Model model){
 
-        List<ListaUsuariosDto> listaUsuariosDto = service.listarUsuarios();
-        model.addAttribute("listaUsuariosDto",listaUsuariosDto);
+        List<ListarUsuarioDTO> listarUsuarioDto = service.listarUsuarios();
+        model.addAttribute("listarUsuarioDto", listarUsuarioDto);
 
         return "usuariolista";
     }

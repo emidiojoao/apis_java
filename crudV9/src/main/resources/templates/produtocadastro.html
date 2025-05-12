@@ -31,10 +31,13 @@
         <a class="nav-link" th:href="@{/home}">Página Inicial</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/usuariolista}">Usuário</a>
+        <a class="nav-link" th:href="@{/lista-usuario}">Usuário</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/produtolista}">Produto</a>
+        <a class="nav-link" th:href="@{/lista-produto}">Produto</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/produtolista}">Contato</a>
       </li>
 <!--      <li class="nav-item">-->
 <!--        <a class="nav-link" th:href="@{/cadastro}">Cadastre-se</a>-->
@@ -59,7 +62,7 @@
 
           <h3 class="text-center mb-4">Cadastro de Produto</h3>
 
-          <form method="post" th:action="@{/cadastro-produto}" th:object="${produtoDto}">
+          <form method="post" th:action="@{/cadastro-produto}" th:object="${cadastrarProdutoDTO}">
 
             <div class="mb-3">
               <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
@@ -86,7 +89,7 @@
             </div>
 
             <div class="d-grid">
-              <button type="button" class="btn btn-secondary w-100" onclick="window.location.href='/produtolista'">Cancelar</button>
+              <button type="button" class="btn btn-secondary w-100" onclick="window.location.href='/lista-produto'">Cancelar</button>
             </div>
 
           </form>

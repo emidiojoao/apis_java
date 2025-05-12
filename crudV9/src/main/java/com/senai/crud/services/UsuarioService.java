@@ -1,6 +1,10 @@
 package com.senai.crud.services;
 
 import com.senai.crud.dtos.*;
+import com.senai.crud.dtos.usuario.AtualizarUsuarioDTO;
+import com.senai.crud.dtos.usuario.ListarUsuarioDTO;
+import com.senai.crud.dtos.usuario.RequisicaoUsuarioDTO;
+import com.senai.crud.dtos.usuario.RespostaUsuarioDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.models.UsuarioModel;
 import com.senai.crud.repositories.UsuarioRepository;
@@ -19,7 +23,7 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository repository;
 
-    public MensagemDto adicionarUsuario(RequestDto usuarioDto){
+    public MensagemDto adicionarUsuario(RequisicaoUsuarioDTO usuarioDto){
 
         //--Convertendo o objeto DTO em Model
         UsuarioModel usuarioModel = new UsuarioModel();
@@ -35,7 +39,7 @@ public class UsuarioService {
         return mensagem;
     }
 
-    public boolean atualizarUsuario( Long id, UsuarioAtualizarDto usuarioDto ){
+    public boolean atualizarUsuario( Long id, AtualizarUsuarioDTO usuarioDto ){
 
         //--buscar no banco de dados o usuário pelo ID
         Optional<UsuarioModel> usuarioOptional = repository.findById(id);
@@ -74,20 +78,20 @@ public class UsuarioService {
 
     }
 
-    public UsuarioAtualizarDto buscarUsuarioId(Long id){
+    public AtualizarUsuarioDTO buscarUsuarioId(Long id){
 
          Optional<UsuarioModel> usuarioOP = repository.findById(id);
          if (!usuarioOP.isPresent()){
              //--quando não encontra retorna um objeto com id ZERO
-             return new UsuarioAtualizarDto(0L);
+             return new AtualizarUsuarioDTO(0L);
          }
-         return new UsuarioAtualizarDto(usuarioOP.get());
+         return new AtualizarUsuarioDTO(usuarioOP.get());
 
     }
 
-    public ResponseDto buscarUsuarioPorId(Long id){
+    public RespostaUsuarioDTO buscarUsuarioPorId(Long id){
 
-        ResponseDto usuarioRetorno = new ResponseDto();
+        RespostaUsuarioDTO usuarioRetorno = new RespostaUsuarioDTO();
 
         //--buscar no banco de dados o usuário pelo ID
         Optional<UsuarioModel> usuarioOptional = repository.findById(id);
@@ -110,19 +114,19 @@ public class UsuarioService {
         return  usuarioRetorno;
     }
 
-    public List<ListaUsuariosDto> listarUsuarios(){
+    public List<ListarUsuarioDTO> listarUsuarios(){
 
         //--Obter os usuários do banco de dados
         List<UsuarioModel> listaUsuarios = repository.findAll();
 
         //--Criar a lista DTO para realizar o retorno
-        List<ListaUsuariosDto> lista = new ArrayList<>();
+        List<ListarUsuarioDTO> lista = new ArrayList<>();
 
         //--Percorre a lista de usuários do banco e converter em uma lista de DTO
         for ( UsuarioModel usuario :  listaUsuarios ){
 
             //--Crio UM objeto DTO
-            ListaUsuariosDto usuarioRetorno = new ListaUsuariosDto();
+            ListarUsuarioDTO usuarioRetorno = new ListarUsuarioDTO();
 
             //--Converto UM objeto model em UM objeto DTO
             usuarioRetorno.setId(usuario.getId());
@@ -136,11 +140,7 @@ public class UsuarioService {
         return lista;
     }
 
-    public MensagemDto removerUsuario(Long id){
-
-        MensagemDto mensagem = new MensagemDto();
-        mensagem.setMensagem("Erro ao excluir");
-        mensagem.setSucesso(false);
+    public Boolean removerUsuario(Long id){
 
         //--buscar no banco de dados o usuário pelo ID
         Optional<UsuarioModel> usuarioOptional = repository.findById(id);
@@ -149,16 +149,13 @@ public class UsuarioService {
         if (usuarioOptional.isPresent()){
 
             repository.delete(usuarioOptional.get());
-
-            mensagem.setMensagem("Sucesso ao excluir o usuário");
-            mensagem.setSucesso(true);
-
+            return true;
         }
 
-        return mensagem;
+        return false;
     }
 
-    public MensagemDto logar(LoginDto login){
+    public MensagemDto logar(LoginDTO login){
 
         MensagemDto mensagem = new MensagemDto();
         mensagem.setSucesso(false);

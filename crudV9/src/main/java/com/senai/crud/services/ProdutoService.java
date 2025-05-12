@@ -1,8 +1,9 @@
 package com.senai.crud.services;
 
-import com.senai.crud.dtos.AtualizarProdutoDTO;
-import com.senai.crud.dtos.ObterProdutoDTO;
-import com.senai.crud.dtos.ProdutoDto;
+import com.senai.crud.dtos.produto.CadastrarProdutoDTO;
+import com.senai.crud.dtos.produto.ListarProdutoDTO;
+import com.senai.crud.dtos.produto.AtualizarProdutoDTO;
+import com.senai.crud.dtos.produto.ObterProdutoDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.models.ProdutoModel;
 import com.senai.crud.repositories.ProdutoRepository;
@@ -19,14 +20,14 @@ public class ProdutoService {
     @Autowired
     ProdutoRepository repository;
 
-    public List<ProdutoDto> listarProdutos(){
+    public List<ListarProdutoDTO> listarProdutos(){
 
-        List<ProdutoModel> listaProdutos = repository.findAll();
-        List<ProdutoDto> listaProdutoDto = new ArrayList<>();
+        List<ProdutoModel> listaProdutoModel = repository.findAll();
+        List<ListarProdutoDTO> listarProdutoDto = new ArrayList<>();
 
-        for (ProdutoModel produto :  listaProdutos){
+        for (ProdutoModel produto :  listaProdutoModel){
 
-            ProdutoDto produtoRetorno = new ProdutoDto();
+            ListarProdutoDTO produtoRetorno = new ListarProdutoDTO();
 
             produtoRetorno.setId(produto.getId());
             produtoRetorno.setNome(produto.getNome());
@@ -34,37 +35,37 @@ public class ProdutoService {
             produtoRetorno.setQuantidade(produto.getQuantidade());
             produtoRetorno.setPreco(produto.getPreco());
 
-            listaProdutoDto.add(produtoRetorno);
+            listarProdutoDto.add(produtoRetorno);
         }
 
-        return listaProdutoDto;
+        return listarProdutoDto;
     }
 
-    public void cadastrarProduto(ProdutoDto produtoDto){
+    public void cadastrarProduto(CadastrarProdutoDTO cadastrarProdutoDTO){
 
-        Optional<ProdutoModel> optionalNome = repository.findByNome(produtoDto.getNome());
+        Optional<ProdutoModel> optionalNome = repository.findByNome(cadastrarProdutoDTO.getNome());
         if(optionalNome.isPresent()){
             throw new InvalidOperationException("Já existe um produto cadastrado com esse nome!");
         }
 
-        if(produtoDto.getNome().isBlank()){
+        if(cadastrarProdutoDTO.getNome().isBlank()){
             throw new InvalidOperationException("O nome do produto é obrigatorio!");
         }
 
-        if(produtoDto.getPreco() < 0){
+        if(cadastrarProdutoDTO.getPreco() < 0){
             throw new InvalidOperationException("O preço do produto não pode ser negativo!");
         }
 
-        if(produtoDto.getQuantidade() < 0){
+        if(cadastrarProdutoDTO.getQuantidade() < 0){
             throw new InvalidOperationException("O estoque não pode ser negativo!");
         }
 
         ProdutoModel produtoModel = new ProdutoModel();
 
-        produtoModel.setNome(produtoDto.getNome());
-        produtoModel.setDescricao(produtoDto.getDescricao());
-        produtoModel.setPreco(produtoDto.getPreco());
-        produtoModel.setQuantidade(produtoDto.getQuantidade());
+        produtoModel.setNome(cadastrarProdutoDTO.getNome());
+        produtoModel.setDescricao(cadastrarProdutoDTO.getDescricao());
+        produtoModel.setPreco(cadastrarProdutoDTO.getPreco());
+        produtoModel.setQuantidade(cadastrarProdutoDTO.getQuantidade());
         repository.save(produtoModel);
     }
 
