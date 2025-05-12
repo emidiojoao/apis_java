@@ -58,4 +58,23 @@ public class CategoriaService {
         }
         return false;
     }
+
+    public Boolean atualizarCategoria(Long id, RequisicaoCategoriaDTO requisicaoCategoriaDTO){
+
+        Optional<CategoriaModel> buscarCategoria = repository.findById(id);
+        if(buscarCategoria.isEmpty()){
+            throw new InvalidOperationException("Cstegoria não encontrada!");
+        }
+
+        Boolean sucesso = validaDuplicidade(requisicaoCategoriaDTO.getNome());
+        if(sucesso){
+            throw new InvalidOperationException("Nome de categoria já cadastrada!");
+        }
+
+        CategoriaModel categoriaModel = buscarCategoria.get();
+
+        categoriaModel.setNome(requisicaoCategoriaDTO.getNome());
+        repository.save(categoriaModel);
+        return true;
+    }
 }
