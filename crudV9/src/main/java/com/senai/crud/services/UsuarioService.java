@@ -155,25 +155,16 @@ public class UsuarioService {
         return false;
     }
 
-    public MensagemDto logar(LoginDTO login){
+    public Boolean logar(LoginDTO loginDTO){
 
-        MensagemDto mensagem = new MensagemDto();
-        mensagem.setSucesso(false);
-        mensagem.setMensagem("Erro ao realizar login");
-
-        Optional<UsuarioModel> usuarioOptional = repository.findByLogin(login.getLogin());
-
+        Optional<UsuarioModel> usuarioOptional = repository.findByLogin(loginDTO.getLogin());
         if (usuarioOptional.isPresent()){
 
-            if (usuarioOptional.get().getSenha().equals(login.getSenha())){
-
-                //-Deu certo
-                mensagem.setSucesso(true);
-                mensagem.setMensagem("Sucesso ao realizar login");
+            if (usuarioOptional.get().getSenha().equals(loginDTO.getSenha())){
+                return true;
             }
         }
-
-        return  mensagem;
+        return false;
     }
 
 }
