@@ -62,7 +62,7 @@
             <span class="mensagem" th:text="${erro}">Erro</span>
           </div>
 
-          <form method="post" th:action="@{'/atualizar-produto/' + ${id}}" th:object="${obterProdutoDTO}">
+          <form method="post" th:action="@{'/atualizar-produto/' + ${id}}" th:object="${produtoDTO}">
 
             <div class="mb-3">
               <label for="produto_id" class="form-label">ID <span class="text-danger">*</span></label>

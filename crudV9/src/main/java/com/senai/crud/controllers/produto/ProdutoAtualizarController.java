@@ -1,7 +1,7 @@
 package com.senai.crud.controllers.produto;
 
-import com.senai.crud.dtos.produto.AtualizarProdutoDTO;
-import com.senai.crud.dtos.produto.ObterProdutoDTO;
+import com.senai.crud.dtos.produto.RequisicaoProdutoDTO;
+import com.senai.crud.dtos.produto.ProdutoDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,18 +20,18 @@ public class ProdutoAtualizarController {
     @GetMapping("/{id}")
     public String obterProduto(Model model, @PathVariable Long id){
 
-        ObterProdutoDTO obterProdutoDTO = service.obterProdutoPorId(id);
-        model.addAttribute("obterProdutoDTO", obterProdutoDTO);
+        ProdutoDTO produtoDTO = service.obterProdutoPorId(id);
+        model.addAttribute("obterProdutoDTO", produtoDTO);
 
         return "produtoatualizar";
     }
 
     @PostMapping("/{id}")
-    public String atualizarProduto(@PathVariable Long id, @ModelAttribute("atualizarProdutoDTO") AtualizarProdutoDTO atualizarProdutoDTO, RedirectAttributes redirectAttributes){
+    public String atualizarProduto(@PathVariable Long id, @ModelAttribute("atualizarProdutoDTO") RequisicaoProdutoDTO requisicaoProdutoDTO, RedirectAttributes redirectAttributes){
 
         try {
 
-            service.atualizarProduto(id, atualizarProdutoDTO);
+            service.atualizarProduto(id, requisicaoProdutoDTO);
             return "redirect:/lista-produto?sucesso";
         } catch (InvalidOperationException ex) {
             redirectAttributes.addFlashAttribute("erro", ex.getMessage());

@@ -2,8 +2,8 @@ package com.senai.crud.services;
 
 import com.senai.crud.dtos.produto.CadastrarProdutoDTO;
 import com.senai.crud.dtos.produto.ListarProdutoDTO;
-import com.senai.crud.dtos.produto.AtualizarProdutoDTO;
-import com.senai.crud.dtos.produto.ObterProdutoDTO;
+import com.senai.crud.dtos.produto.RequisicaoProdutoDTO;
+import com.senai.crud.dtos.produto.ProdutoDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.models.ProdutoModel;
 import com.senai.crud.repositories.ProdutoRepository;
@@ -69,52 +69,52 @@ public class ProdutoService {
         repository.save(produtoModel);
     }
 
-    public ObterProdutoDTO obterProdutoPorId(Long id){
+    public ProdutoDTO obterProdutoPorId(Long id){
 
-        ObterProdutoDTO obterProdutoDTO = new ObterProdutoDTO();
+        ProdutoDTO produtoDTO = new ProdutoDTO();
         Optional<ProdutoModel> buscarProduto = repository.findById(id);
 
         if(buscarProduto.isPresent()){
-            obterProdutoDTO.setId(buscarProduto.get().getId());
-            obterProdutoDTO.setNome(buscarProduto.get().getNome());
-            obterProdutoDTO.setDescricao(buscarProduto.get().getDescricao());
-            obterProdutoDTO.setPreco(buscarProduto.get().getPreco());
-            obterProdutoDTO.setQuantidade(buscarProduto.get().getQuantidade());
+            produtoDTO.setId(buscarProduto.get().getId());
+            produtoDTO.setNome(buscarProduto.get().getNome());
+            produtoDTO.setDescricao(buscarProduto.get().getDescricao());
+            produtoDTO.setPreco(buscarProduto.get().getPreco());
+            produtoDTO.setQuantidade(buscarProduto.get().getQuantidade());
         }
 
-        return obterProdutoDTO;
+        return produtoDTO;
     }
 
-    public void atualizarProduto(Long id, AtualizarProdutoDTO atualizarProdutoDto){
+    public void atualizarProduto(Long id, RequisicaoProdutoDTO requisicaoProdutoDto){
 
         Optional<ProdutoModel> buscarProduto = repository.findById(id);
         if(buscarProduto.isEmpty()){
             throw new InvalidOperationException("Produto inexistente!");
         }
 
-        Optional<ProdutoModel> buscarNomeProduto = repository.findByNome(atualizarProdutoDto.getNome());
+        Optional<ProdutoModel> buscarNomeProduto = repository.findByNome(requisicaoProdutoDto.getNome());
         if(buscarNomeProduto.isPresent() && !buscarNomeProduto.get().getId().equals(id)){
             throw new InvalidOperationException("Já possui um produto com esse nome!");
         }
 
-        if(atualizarProdutoDto.getNome().isBlank()){
+        if(requisicaoProdutoDto.getNome().isBlank()){
             throw new InvalidOperationException("O nome não pode ser vazio!");
         }
 
-        if(atualizarProdutoDto.getPreco() <= 0){
+        if(requisicaoProdutoDto.getPreco() <= 0){
             throw new InvalidOperationException("O preço não pode ser zerado ou negativo!");
         }
 
-        if(atualizarProdutoDto.getQuantidade() < 0){
+        if(requisicaoProdutoDto.getQuantidade() < 0){
             throw new InvalidOperationException("O estoque não pode ser negativo!");
         }
 
         ProdutoModel produtoModel = buscarProduto.get();
 
-        produtoModel.setNome(atualizarProdutoDto.getNome());
-        produtoModel.setDescricao(atualizarProdutoDto.getDescricao());
-        produtoModel.setPreco(atualizarProdutoDto.getPreco());
-        produtoModel.setQuantidade(atualizarProdutoDto.getQuantidade());
+        produtoModel.setNome(requisicaoProdutoDto.getNome());
+        produtoModel.setDescricao(requisicaoProdutoDto.getDescricao());
+        produtoModel.setPreco(requisicaoProdutoDto.getPreco());
+        produtoModel.setQuantidade(requisicaoProdutoDto.getQuantidade());
         repository.save(produtoModel);
     }
 

@@ -1,6 +1,6 @@
 package com.senai.crud.dtos.produto;
 
-public class ObterProdutoDTO {
+public class RequisicaoProdutoDTO {
 
     private Long id;
     private String nome;
@@ -8,10 +8,10 @@ public class ObterProdutoDTO {
     private Double preco;
     private Integer quantidade;
 
-    public ObterProdutoDTO() {
+    public RequisicaoProdutoDTO() {
     }
 
-    public ObterProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade) {
+    public RequisicaoProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;

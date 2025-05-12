@@ -1,6 +1,6 @@
 package com.senai.crud.dtos.produto;
 
-public class AtualizarProdutoDTO {
+public class ProdutoDTO {
 
     private Long id;
     private String nome;
@@ -8,10 +8,10 @@ public class AtualizarProdutoDTO {
     private Double preco;
     private Integer quantidade;
 
-    public AtualizarProdutoDTO() {
+    public ProdutoDTO() {
     }
 
-    public AtualizarProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade) {
+    public ProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
