@@ -2,6 +2,8 @@ package com.senai.crud.services;
 
 import com.senai.crud.dtos.categoria.CategoriaDTO;
 import com.senai.crud.dtos.categoria.ListaCategoriaDTO;
+import com.senai.crud.dtos.categoria.RequisicaoCategoriaDTO;
+import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.models.CategoriaModel;
 import com.senai.crud.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
@@ -31,5 +34,28 @@ public class CategoriaService {
 
         return listaCategoriaDTO;
 
+    }
+
+    public Boolean cadastrarCategoria(RequisicaoCategoriaDTO requisicaoCategoriaDTO){
+
+        Boolean resultado = validaDuplicidade(requisicaoCategoriaDTO.getNome());
+        if(resultado){
+            throw new InvalidOperationException("Nome de categoria já cadastrado!");
+        }
+
+        CategoriaModel categoriaModel = new CategoriaModel();
+
+        categoriaModel.setNome(requisicaoCategoriaDTO.getNome());
+        repository.save(categoriaModel);
+        return true;
+    }
+
+    protected Boolean validaDuplicidade(String nome){
+        Optional<CategoriaModel> categoriaModelOptional = repository.findByNome(nome);
+
+        if(categoriaModelOptional.isPresent()){
+            return true;
+        }
+        return false;
     }
 }
