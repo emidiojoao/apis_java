@@ -1,4 +1,4 @@
-package com.senai.crud.controllers;
+package com.senai.crud.controllers.commons;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -18,17 +18,13 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Página Inicial</a>
+            <a class="nav-link" th:href="@{/home}">Página Inicial</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/usuariolista">Usuário</a>
+                <a class="nav-link" th:href="@{/usuariolista}">Usuário</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Contato</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Cadastre-se</a>
+                <a class="nav-link" th:href="@{/produtolista}">Produto</a>
             </li>
         </ul>
     </div>
@@ -51,7 +47,7 @@
                 <!-- Adiciona uma margem inferior de 1rem (16px) ao elemento -->
                 <div class="mb-3">
                     <label for="user_id" class="form-label">Id</label>
-                    <input type="text" class="form-control" th:field="*{id}" id="user_id" name="user_id" required/>
+                    <input type="text" class="form-control" th:field="*{id}" id="user_id" name="user_id" disabled/>
                 </div>
 
                 <!-- Adiciona uma margem inferior de 1rem (16px) ao elemento -->
@@ -74,8 +70,7 @@
 
                 <div class="row">
                     <div class="col-auto">
-                        <button type="sub
-                        mit" class="btn btn-primary w-100">Cadastrar</button>
+                        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
                     </div>
                     <div class="col-auto">
                         <a th:href="@{~/usuariolista}" class="btn btn-secondary">Fechar</a>
@@ -84,11 +79,6 @@
 
                 <!-- Fim do formulário -->
             </form>
-
-            <!-- url passando parametro -> "localhost:8080/login?erro"  -->
-            <div th:if="${param.erro}" class="alert alert-danger" role="alert">
-                <span class="mensagem">Erro ao atualizar os dados do usuário!</span>
-            </div>
 
             <!-- url passando parametro -> "localhost:8080/login?erro"  -->
             <div th:if="${erro}" class="alert alert-danger" role="alert">

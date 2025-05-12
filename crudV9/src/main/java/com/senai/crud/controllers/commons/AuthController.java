@@ -1,4 +1,4 @@
-package com.senai.crud.controllers;
+package com.senai.crud.controllers.commons;
 
 import com.senai.crud.dtos.*;
 import com.senai.crud.services.UsuarioService;

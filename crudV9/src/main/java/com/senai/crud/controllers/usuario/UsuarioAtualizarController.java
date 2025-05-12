@@ -1,4 +1,4 @@
-package com.senai.crud.controllers;
+package com.senai.crud.controllers.usuario;
 
 import com.senai.crud.dtos.UsuarioAtualizarDto;
 import com.senai.crud.services.UsuarioService;

@@ -1,4 +1,4 @@
-package com.senai.crud.controllers;
+package com.senai.crud.controllers.usuario;
 
 import com.senai.crud.dtos.MensagemDto;
 import com.senai.crud.dtos.RequestDto;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/cadastro")
-public class CadastroController {
+public class UsuarioCadastroController {
 
     @Autowired
     UsuarioService service;
