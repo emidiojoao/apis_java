@@ -10,32 +10,7 @@
 </head>
 <body>
 
-<!-- Barra de navegação -->
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li>
-            <a class="nav-link" th:href="@{/home}">Página Inicial</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/lista-usuario}">Usuário</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/lista-produto}">Produto</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/produtolista}">Contato</a>
-            </li>
-        </ul>
-    </div>
-    <form class="form-inline" th:action="@{/logout}" th:method="post">
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Sair</button>
-    </form>
-</nav>
+<div th:insert="navbar :: navigation" class="nav-wrapp"></div>
 
 <div class="container mt-3">
 

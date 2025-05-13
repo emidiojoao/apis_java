@@ -26,11 +26,9 @@ public class AuthController {
     @PostMapping
     public String login(@ModelAttribute("loginDto") LoginDTO login){
 
-        System.out.println(login.getLogin() + " " + login.getSenha());
+        Boolean sucesso =  service.logar(login);
 
-        MensagemDto mensagem =  service.logar(login);
-
-        if (mensagem.isSucesso()){
+        if (sucesso){
             return "redirect:/home";
         }
 
