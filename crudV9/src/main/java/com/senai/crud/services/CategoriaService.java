@@ -36,6 +36,16 @@ public class CategoriaService {
 
     }
 
+    public CategoriaDTO buscarCategoriaPorId(Long id){
+
+        Optional<CategoriaModel> buscarCategoria = repository.findById(id);
+        if(buscarCategoria.isEmpty()){
+            throw new InvalidOperationException("Categoria não encontrada");
+        }
+
+        return CategoriaDTO.of(buscarCategoria.get());
+    }
+
     public Boolean cadastrarCategoria(RequisicaoCategoriaDTO requisicaoCategoriaDTO){
 
         Boolean resultado = validaDuplicidade(requisicaoCategoriaDTO.getNome());
@@ -48,15 +58,6 @@ public class CategoriaService {
         categoriaModel.setNome(requisicaoCategoriaDTO.getNome());
         repository.save(categoriaModel);
         return true;
-    }
-
-    protected Boolean validaDuplicidade(String nome){
-        Optional<CategoriaModel> categoriaModelOptional = repository.findByNome(nome);
-
-        if(categoriaModelOptional.isPresent()){
-            return true;
-        }
-        return false;
     }
 
     public Boolean atualizarCategoria(Long id, RequisicaoCategoriaDTO requisicaoCategoriaDTO){
@@ -76,5 +77,24 @@ public class CategoriaService {
         categoriaModel.setNome(requisicaoCategoriaDTO.getNome());
         repository.save(categoriaModel);
         return true;
+    }
+
+    public Boolean deletarCategoria(Long id){
+
+        Optional<CategoriaModel> buscarCategoria = repository.findById(id);
+        if(buscarCategoria.isPresent()){
+            repository.delete(buscarCategoria.get());
+            return true;
+        }
+        return false;
+    }
+
+    protected Boolean validaDuplicidade(String nome){
+        Optional<CategoriaModel> categoriaModelOptional = repository.findByNome(nome);
+
+        if(categoriaModelOptional.isPresent()){
+            return true;
+        }
+        return false;
     }
 }
