@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
-@RequestMapping("cadastro-produto")
+@RequestMapping("/cadastro-produto")
 public class ProdutoCadastrarController {
 
     @Autowired

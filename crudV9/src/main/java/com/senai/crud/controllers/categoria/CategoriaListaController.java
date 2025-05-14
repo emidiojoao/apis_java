@@ -2,7 +2,6 @@ package com.senai.crud.controllers.categoria;
 
 import com.senai.crud.dtos.categoria.ListaCategoriaDTO;
 import com.senai.crud.services.CategoriaService;
-import com.senai.crud.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/lista-categoria")
-public class ListaCategoriaController {
+public class CategoriaListaController {
 
     @Autowired
     CategoriaService service;
