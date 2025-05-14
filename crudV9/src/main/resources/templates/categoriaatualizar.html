@@ -12,7 +12,7 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-  <title>Cadastro de Categoria</title>
+  <title>Atualizar Categoria</title>
 
 </head>
 
@@ -30,9 +30,18 @@
 
         <div class="card-body">
 
-          <h3 class="text-center mb-4">Cadastro de Categoria</h3>
+          <h3 class="text-center mb-4">Atualizar Categoria</h3>
 
-          <form method="post" th:action="@{/cadastro-categoria}" th:object="${requisicaoCategoriaDTO}">
+          <div th:if="${erro}" class="alert alert-danger" role="alert">
+            <span class="mensagem" th:text="${erro}">Erro</span>
+          </div>
+
+          <form method="post" th:action="@{'/atualizar-categoria/' + ${categoriaDTO.id}}" th:object="${categoriaDTO}">
+
+            <div class="mb-3">
+              <label for="id_categoria" class="form-label">ID <span class="text-danger">*</span></label>
+              <input type="text" class="form-control" th:field="*{id}" id="id_categoria" name="id_categoria" disabled>
+            </div>
 
             <div class="mb-3">
               <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
@@ -40,7 +49,7 @@
             </div>
 
             <div class="d-grid mb-2">
-              <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+              <button type="submit" class="btn btn-primary w-100">Atualizar</button>
             </div>
 
             <div class="d-grid">
@@ -49,9 +58,6 @@
 
           </form>
 
-          <div th:if="${erro}" class="alert alert-danger" role="alert">
-            <span class="mensagem" th:text="${erro}">Erro</span>
-          </div>
 
         </div>
 

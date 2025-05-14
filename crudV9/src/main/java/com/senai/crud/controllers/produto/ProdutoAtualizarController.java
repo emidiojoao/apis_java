@@ -21,13 +21,14 @@ public class ProdutoAtualizarController {
     public String obterProduto(Model model, @PathVariable Long id){
 
         ProdutoDTO produtoDTO = service.obterProdutoPorId(id);
-        model.addAttribute("obterProdutoDTO", produtoDTO);
+        produtoDTO.setId(id);
+        model.addAttribute("produtoDTO", produtoDTO);
 
         return "produtoatualizar";
     }
 
     @PostMapping("/{id}")
-    public String atualizarProduto(@PathVariable Long id, @ModelAttribute("atualizarProdutoDTO") RequisicaoProdutoDTO requisicaoProdutoDTO, RedirectAttributes redirectAttributes){
+    public String atualizarProduto(@PathVariable Long id, @ModelAttribute("produtoDTO") RequisicaoProdutoDTO requisicaoProdutoDTO, RedirectAttributes redirectAttributes){
 
         try {
 

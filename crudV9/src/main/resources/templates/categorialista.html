@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div th:insert="navbar :: navigation" class="nav-wrapp"></div>
+<div th:insert="navbar :: navigation" class="nav-wrapper"></div>
 
 <div class="container mt-3">
 
@@ -43,7 +43,7 @@
           <tr th:each="categoria : ${listaCategoriaDTO}">
             <td th:text="${categoria.id}"></td>
             <td th:text="${categoria.nome}"></td>
-            <td><a th:href="@{'/atualizar-produto/' + ${categoria.id}}" class="btn btn-warning">Visualizar</a></td>
+            <td><a th:href="@{'/atualizar-categoria/' + ${categoria.id}}" class="btn btn-warning">Visualizar</a></td>
             <td><button th:data-categoria-id="${categoria.id}" class="excluir btn btn-danger">Excluir</button></td>
           </tr>
           </tbody>
