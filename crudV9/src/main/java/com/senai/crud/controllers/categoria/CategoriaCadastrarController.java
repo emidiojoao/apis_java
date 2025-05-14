@@ -30,7 +30,7 @@ public class CategoriaCadastrarController {
 
         try {
             service.cadastrarCategoria(requisicaoCategoriaDTO);
-            return "redirect:/categorialista?sucesso";
+            return "redirect:/lista-categoria?sucesso";
         } catch (InvalidOperationException ex) {
             redirectAttributes.addFlashAttribute("erro", ex.getMessage());
             return "redirect:/cadastro-categoria";

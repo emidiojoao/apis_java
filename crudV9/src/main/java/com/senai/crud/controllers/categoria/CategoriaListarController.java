@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/lista-categoria")
-public class CategoriaListaController {
+public class CategoriaListarController {
 
     @Autowired
     CategoriaService service;
@@ -21,7 +21,7 @@ public class CategoriaListaController {
     public String obterListaCategoria(Model model){
 
         List<ListaCategoriaDTO> listaCategoriaDTO = service.listaCategoria();
-        model.addAttribute("listaCategotiaDTO", listaCategoriaDTO);
+        model.addAttribute("listaCategoriaDTO", listaCategoriaDTO);
 
         return "categorialista";
     }

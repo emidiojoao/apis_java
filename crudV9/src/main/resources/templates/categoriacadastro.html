@@ -40,7 +40,7 @@
             </div>
 
             <div class="d-grid mb-2">
-              <button type="submit" class="btn btn-primary w-100">Cadastrar Produto</button>
+              <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
             </div>
 
             <div class="d-grid">
@@ -51,10 +51,6 @@
 
           <div th:if="${erro}" class="alert alert-danger" role="alert">
             <span class="mensagem" th:text="${erro}">Erro</span>
-          </div>
-
-          <div th:if="${param.sucesso}" class="alert alert-success mt-3" role="alert">
-            <span class="mensagem">Produto cadastrado com sucesso!</span>
           </div>
 
         </div>
