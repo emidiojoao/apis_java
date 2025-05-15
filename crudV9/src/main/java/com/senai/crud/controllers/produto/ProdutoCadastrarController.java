@@ -34,8 +34,8 @@ public class ProdutoCadastrarController {
         CadastrarProdutoDTO cadastrarProdutoDTO = new CadastrarProdutoDTO();
         model.addAttribute("cadastrarProdutoDTO", cadastrarProdutoDTO);
 
-        List<ListaCategoriaDTO> listaCategoira = categoriaService.listaCategoria();
-        model.addAttribute("listaCategoria", listaCategoira);
+        List<ListaCategoriaDTO> listaCategoriaDTO = categoriaService.listaCategoria();
+        model.addAttribute("listaCategoriaDTO", listaCategoriaDTO);
 
         return "produtocadastro";
     }

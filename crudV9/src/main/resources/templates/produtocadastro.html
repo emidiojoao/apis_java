@@ -54,6 +54,17 @@
               <input type="number" class="form-control" th:field="*{quantidade}" id="quantidade" name="quantidade" placeholder="0" min="0" required>
             </div>
 
+            <div class="mb-3">
+              <label for="categoria" class="form-label">Categoria <span class="text-danger">*</span></label>
+              <select class="form-select" th:field="*{categoriaId}" id="categoria" name="categoria" required>
+                <option value="">Selecione uma categoria</option>
+                <option th:each="categoria : ${listaCategoriaDTO}"
+                        th:value="${categoria.id}"
+                        th:text="${categoria.nome}">
+                </option>
+              </select>
+            </div>
+
             <div class="d-grid mb-2">
               <button type="submit" class="btn btn-primary w-100">Cadastrar Produto</button>
             </div>
