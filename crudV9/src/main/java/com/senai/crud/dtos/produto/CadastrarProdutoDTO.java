@@ -6,15 +6,17 @@ public class CadastrarProdutoDTO {
     private String descricao;
     private Double preco;
     private Integer quantidade;
+    private Long categoriaId;
 
     public CadastrarProdutoDTO() {
     }
 
-    public CadastrarProdutoDTO(String nome, String descricao, Double preco, Integer quantidade) {
+    public CadastrarProdutoDTO(String nome, String descricao, Double preco, Integer quantidade, Long categoriaId) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.categoriaId = categoriaId;
     }
 
     public String getNome() {
@@ -47,5 +49,13 @@ public class CadastrarProdutoDTO {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Long getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Long categoriaId) {
+        this.categoriaId = categoriaId;
     }
 }

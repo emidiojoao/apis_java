@@ -22,6 +22,10 @@ public class ProdutoModel {
     @Column(name = "quantidade")
     private int quantidade;
 
+    @ManyToOne
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
+    private CategoriaModel categoria;
+
     public ProdutoModel() {
     }
 
@@ -71,5 +75,13 @@ public class ProdutoModel {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public CategoriaModel getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(CategoriaModel categoria) {
+        this.categoria = categoria;
     }
 }

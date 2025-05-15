@@ -5,7 +5,9 @@ import com.senai.crud.dtos.produto.ListarProdutoDTO;
 import com.senai.crud.dtos.produto.RequisicaoProdutoDTO;
 import com.senai.crud.dtos.produto.ProdutoDTO;
 import com.senai.crud.exception.InvalidOperationException;
+import com.senai.crud.models.CategoriaModel;
 import com.senai.crud.models.ProdutoModel;
+import com.senai.crud.repositories.CategoriaRepository;
 import com.senai.crud.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class ProdutoService {
 
     @Autowired
     ProdutoRepository repository;
+
+    @Autowired
+    CategoriaRepository categoriaRepository;
 
     public List<ListarProdutoDTO> listarProdutos(){
 
@@ -60,13 +65,18 @@ public class ProdutoService {
             throw new InvalidOperationException("O estoque não pode ser negativo!");
         }
 
-        ProdutoModel produtoModel = new ProdutoModel();
 
-        produtoModel.setNome(cadastrarProdutoDTO.getNome());
-        produtoModel.setDescricao(cadastrarProdutoDTO.getDescricao());
-        produtoModel.setPreco(cadastrarProdutoDTO.getPreco());
-        produtoModel.setQuantidade(cadastrarProdutoDTO.getQuantidade());
-        repository.save(produtoModel);
+        Optional<CategoriaModel> categoriaModelOptional = categoriaRepository.findById(cadastrarProdutoDTO.getCategoriaId());
+        if(categoriaModelOptional.isPresent()){
+            ProdutoModel produtoModel = new ProdutoModel();
+
+            produtoModel.setNome(cadastrarProdutoDTO.getNome());
+            produtoModel.setDescricao(cadastrarProdutoDTO.getDescricao());
+            produtoModel.setPreco(cadastrarProdutoDTO.getPreco());
+            produtoModel.setQuantidade(cadastrarProdutoDTO.getQuantidade());
+            produtoModel.setCategoria(categoriaModelOptional.get());
+            repository.save(produtoModel);
+        }
     }
 
     public ProdutoDTO obterProdutoPorId(Long id){
