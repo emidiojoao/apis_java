@@ -28,6 +28,7 @@ public class ProdutoService {
     public List<ListarProdutoDTO> listarProdutos(){
 
         List<ProdutoModel> listaProdutoModel = repository.findAll();
+
         List<ListarProdutoDTO> listarProdutoDto = new ArrayList<>();
 
         for (ProdutoModel produto :  listaProdutoModel){
@@ -40,6 +41,9 @@ public class ProdutoService {
             produtoRetorno.setQuantidade(produto.getQuantidade());
             produtoRetorno.setPreco(produto.getPreco());
 
+            if(produto.getCategoria() != null) {
+                produtoRetorno.setCategoria(produto.getCategoria().getNome());
+            }
             listarProdutoDto.add(produtoRetorno);
         }
 

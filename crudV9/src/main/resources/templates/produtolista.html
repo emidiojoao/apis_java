@@ -37,6 +37,7 @@
                         <th>Descrição</th>
                         <th>Preço</th>
                         <th>Quantidade</th>
+                        <th>Categoria</th>
                         <th style="white-space: nowrap;">Ação</th>
                         <th style="white-space: nowrap;"></th>
                     </tr>
@@ -49,6 +50,7 @@
                         <td th:text="${produto.descricao}"></td>
                         <td th:text="${produto.preco}"></td>
                         <td th:text="${produto.quantidade}"></td>
+                        <td th:text="${produto.categoria}"></td>
                         <td><a th:href="@{'/atualizar-produto/' + ${produto.id}}" class="btn btn-warning">Visualizar</a></td>
                         <td><button th:data-produto-id="${produto.id}" class="excluir btn btn-danger">Excluir</<button></td>
                     </tr>
