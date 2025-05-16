@@ -7,16 +7,26 @@ public class RequisicaoProdutoDTO {
     private String descricao;
     private Double preco;
     private Integer quantidade;
+    private Long categoriaId;
 
     public RequisicaoProdutoDTO() {
     }
 
-    public RequisicaoProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade) {
+    public RequisicaoProdutoDTO(Long id, String nome, String descricao, Double preco, Integer quantidade, Long categoriaId) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.categoriaId = categoriaId;
+    }
+
+    public Long getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Long categoriaId) {
+        this.categoriaId = categoriaId;
     }
 
     public Long getId() {

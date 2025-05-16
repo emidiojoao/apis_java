@@ -94,6 +94,7 @@ public class ProdutoService {
             produtoDTO.setDescricao(buscarProduto.get().getDescricao());
             produtoDTO.setPreco(buscarProduto.get().getPreco());
             produtoDTO.setQuantidade(buscarProduto.get().getQuantidade());
+            produtoDTO.setCategoriaId(buscarProduto.get().getCategoria().getId());
         }
 
         return produtoDTO;
@@ -123,12 +124,17 @@ public class ProdutoService {
             throw new InvalidOperationException("O estoque não pode ser negativo!");
         }
 
-        ProdutoModel produtoModel = buscarProduto.get();
+        Optional<CategoriaModel> categoriaModelOptional = categoriaRepository.findById(requisicaoProdutoDto.getCategoriaId());
+        if(categoriaModelOptional.isEmpty()){
+            throw new InvalidOperationException("Nenhuma categoria cadastrada!");
+        }
 
+        ProdutoModel produtoModel = buscarProduto.get();
         produtoModel.setNome(requisicaoProdutoDto.getNome());
         produtoModel.setDescricao(requisicaoProdutoDto.getDescricao());
         produtoModel.setPreco(requisicaoProdutoDto.getPreco());
         produtoModel.setQuantidade(requisicaoProdutoDto.getQuantidade());
+        produtoModel.setCategoria(categoriaModelOptional.get());
         repository.save(produtoModel);
     }
 

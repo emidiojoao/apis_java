@@ -36,7 +36,7 @@
             <span class="mensagem" th:text="${erro}">Erro</span>
           </div>
 
-          <form method="post" th:action="@{'/atualizar-produto/' + ${produtoDTO.id}}" th:object="${produtoDTO}">
+          <form method="post" th:action="@{'/atualizar-produto/' + ${atualizarProdutoDTO.id}}" th:object="${atualizarProdutoDTO}">
 
             <div class="mb-3">
               <label for="produto_id" class="form-label">ID <span class="text-danger">*</span></label>
@@ -46,6 +46,17 @@
             <div class="mb-3">
               <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
               <input type="text" class="form-control" th:field="*{nome}" id="nome" name="nome" placeholder="Nome do Produto" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="categoria" class="form-label">Categoria <span class="text-danger">*</span></label>
+              <select class="form-select" th:field="*{categoriaId}" id="categoria" name="categoria" required>
+                <option value="">Selecione uma categoria</option>
+                <option th:each="categoria : ${listaCategoriaDTO}"
+                        th:value="${categoria.id}"
+                        th:text="${categoria.nome}">
+                </option>
+              </select>
             </div>
 
             <div class="mb-3">

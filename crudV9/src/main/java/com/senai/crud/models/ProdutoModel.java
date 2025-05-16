@@ -29,12 +29,13 @@ public class ProdutoModel {
     public ProdutoModel() {
     }
 
-    public ProdutoModel(Long id, String nome, String descricao, double preco, int quantidade) {
+    public ProdutoModel(Long id, String nome, String descricao, double preco, int quantidade, CategoriaModel categoria) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.quantidade = quantidade;
+        this.categoria = categoria;
     }
 
     public Long getId() {
