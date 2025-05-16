@@ -25,13 +25,18 @@ public class ProdutoAtualizarController {
     CategoriaService categoriaService;
 
     @GetMapping("/{id}")
-    public String obterProduto(Model model, @PathVariable Long id){
+    public String obterProduto(Model model, @PathVariable Long id, RedirectAttributes redirectAttributes){
 
-        ProdutoDTO atualizarProdutoDTO = service.obterProdutoPorId(id);
-        model.addAttribute("atualizarProdutoDTO", atualizarProdutoDTO);
+        try {
+            ProdutoDTO atualizarProdutoDTO = service.obterProdutoPorId(id);
+            model.addAttribute("atualizarProdutoDTO", atualizarProdutoDTO);
 
-        List<ListaCategoriaDTO> listaCategoriaDTO = categoriaService.listaCategoria();
-        model.addAttribute("listaCategoriaDTO", listaCategoriaDTO);
+            List<ListaCategoriaDTO> listaCategoriaDTO = categoriaService.listaCategoria();
+            model.addAttribute("listaCategoriaDTO", listaCategoriaDTO);
+        } catch (InvalidOperationException ex){
+            redirectAttributes.addFlashAttribute("erro", ex.getMessage());
+            return "redirect:/atualizar-produto/" + id;
+        }
 
 
         return "produtoatualizar";
