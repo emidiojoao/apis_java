@@ -3,9 +3,12 @@ package com.senai.crud.controllers.produto;
 import com.senai.crud.dtos.categoria.ListaCategoriaDTO;
 import com.senai.crud.dtos.produto.RequisicaoProdutoDTO;
 import com.senai.crud.dtos.produto.ProdutoDTO;
+import com.senai.crud.dtos.usuario.UsuarioSessaoDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.services.CategoriaService;
 import com.senai.crud.services.ProdutoService;
+import com.senai.crud.sessao.ControleSessao;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,19 +28,20 @@ public class ProdutoAtualizarController {
     CategoriaService categoriaService;
 
     @GetMapping("/{id}")
-    public String obterProduto(Model model, @PathVariable Long id, RedirectAttributes redirectAttributes){
+    public String obterProduto(Model model, @PathVariable Long id, HttpServletRequest requisicao){
 
-        try {
-            ProdutoDTO atualizarProdutoDTO = service.obterProdutoPorId(id);
-            model.addAttribute("atualizarProdutoDTO", atualizarProdutoDTO);
+        UsuarioSessaoDTO usuarioSessaoDTO = ControleSessao.obter(requisicao);
 
-            List<ListaCategoriaDTO> listaCategoriaDTO = categoriaService.listaCategoria();
-            model.addAttribute("listaCategoriaDTO", listaCategoriaDTO);
-        } catch (InvalidOperationException ex){
-            redirectAttributes.addFlashAttribute("erro", ex.getMessage());
-            return "redirect:/atualizar-produto/" + id;
+        if(usuarioSessaoDTO.getId() == 0){
+
+            return "redirect:/login";
         }
 
+        ProdutoDTO atualizarProdutoDTO = service.obterProdutoPorId(id);
+        model.addAttribute("atualizarProdutoDTO", atualizarProdutoDTO);
+
+        List<ListaCategoriaDTO> listaCategoriaDTO = categoriaService.listaCategoria();
+        model.addAttribute("listaCategoriaDTO", listaCategoriaDTO);
 
         return "produtoatualizar";
     }
