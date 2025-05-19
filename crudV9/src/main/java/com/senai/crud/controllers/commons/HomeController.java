@@ -1,5 +1,8 @@
 package com.senai.crud.controllers.commons;
 
+import com.senai.crud.dtos.usuario.UsuarioSessaoDTO;
+import com.senai.crud.sessao.ControleSessao;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,7 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @GetMapping
-    public String obterHome(){
+    public String obterHome(HttpServletRequest requesicao){
+
+        UsuarioSessaoDTO usuarioSessaoDTO = ControleSessao.obter(requesicao):
+        if(usuarioSessaoDTO.getId() == 0){
+            return "redirect:/login";
+        }
         return "home";
     }
 }
