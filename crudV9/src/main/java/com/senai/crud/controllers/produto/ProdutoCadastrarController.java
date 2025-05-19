@@ -3,9 +3,12 @@ package com.senai.crud.controllers.produto;
 import com.senai.crud.dtos.categoria.CategoriaDTO;
 import com.senai.crud.dtos.categoria.ListaCategoriaDTO;
 import com.senai.crud.dtos.produto.CadastrarProdutoDTO;
+import com.senai.crud.dtos.usuario.UsuarioSessaoDTO;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.services.CategoriaService;
 import com.senai.crud.services.ProdutoService;
+import com.senai.crud.sessao.ControleSessao;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,7 +32,12 @@ public class ProdutoCadastrarController {
     CategoriaService categoriaService;
 
     @GetMapping
-    public String obterCadastro(Model model){
+    public String obterCadastro(Model model, HttpServletRequest requisicao){
+
+        UsuarioSessaoDTO usuarioSessaoDTO = ControleSessao.obter(requisicao);
+        if(usuarioSessaoDTO.getId() == 0){
+            return "redirect:/login";
+        }
 
         CadastrarProdutoDTO cadastrarProdutoDTO = new CadastrarProdutoDTO();
         model.addAttribute("cadastrarProdutoDTO", cadastrarProdutoDTO);
