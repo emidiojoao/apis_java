@@ -14,7 +14,7 @@ public class HomeController {
     @GetMapping
     public String obterHome(HttpServletRequest requesicao){
 
-        UsuarioSessaoDTO usuarioSessaoDTO = ControleSessao.obter(requesicao):
+        UsuarioSessaoDTO usuarioSessaoDTO = ControleSessao.obter(requesicao);
         if(usuarioSessaoDTO.getId() == 0){
             return "redirect:/login";
         }
