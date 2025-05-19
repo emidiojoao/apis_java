@@ -1,10 +1,7 @@
 package com.senai.crud.services;
 
 import com.senai.crud.dtos.*;
-import com.senai.crud.dtos.usuario.AtualizarUsuarioDTO;
-import com.senai.crud.dtos.usuario.ListarUsuarioDTO;
-import com.senai.crud.dtos.usuario.RequisicaoUsuarioDTO;
-import com.senai.crud.dtos.usuario.RespostaUsuarioDTO;
+import com.senai.crud.dtos.usuario.*;
 import com.senai.crud.exception.InvalidOperationException;
 import com.senai.crud.models.UsuarioModel;
 import com.senai.crud.repositories.UsuarioRepository;
@@ -165,6 +162,24 @@ public class UsuarioService {
             }
         }
         return false;
+    }
+
+    public UsuarioSessaoDTO logar2(LoginDTO loginDTO){
+
+        UsuarioSessaoDTO usuarioSessaoDTO = new UsuarioSessaoDTO();
+
+        Optional<UsuarioModel> usuarioOptional = repository.findByLogin(loginDTO.getLogin());
+
+        if(usuarioOptional.isPresent()){
+
+            if(usuarioOptional.get().getSenha().equals(loginDTO.getSenha())){
+
+                usuarioSessaoDTO.setId(usuarioOptional.get().getId());
+                usuarioSessaoDTO.setNome(usuarioOptional.get().getNome());
+            }
+        }
+
+        return usuarioSessaoDTO;
     }
 
 }
