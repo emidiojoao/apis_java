@@ -20,20 +20,20 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository repository;
 
-    public MensagemDto adicionarUsuario(RequisicaoUsuarioDTO usuarioDto){
+    public boolean adicionarUsuario(RequisicaoUsuarioDTO usuarioDto){
 
-        //--Convertendo o objeto DTO em Model
+        Optional<UsuarioModel> usuarioModelOptional = repository.findByLogin(usuarioDto.getLogin());
+        if(usuarioModelOptional.isPresent()){
+            throw new InvalidOperationException("E-mail já cadastrado!");
+        }
         UsuarioModel usuarioModel = new UsuarioModel();
         usuarioModel.setNome(usuarioDto.getNome());
         usuarioModel.setLogin(usuarioDto.getLogin());
         usuarioModel.setSenha(usuarioDto.getSenha());
 
-        //listaUsuarios.add(usuarioModel);
         repository.save(usuarioModel);
 
-        MensagemDto mensagem = new MensagemDto();
-        mensagem.setMensagem("Cadastrado com sucesso!");
-        return mensagem;
+        return true;
     }
 
     public boolean atualizarUsuario( Long id, AtualizarUsuarioDTO usuarioDto ){
