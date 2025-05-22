@@ -75,9 +75,8 @@
                         <a th:href="@{/login}" class="d-block">voltar para o login</a>
                     </div>
 
-                    <!-- url passando parametro -> "localhost:8080/login?erro"  -->
-                    <div th:if="${param.erro}" class="alert alert-danger" role="alert">
-                        <span class="mensagem">Erro ao realizar o cadastro do usuário!</span>
+                    <div th:if="${erro}" class="alert alert-danger" role="alert">
+                        <span class="mensagem" th:text="${erro}">Erro</span>
                     </div>
 
                     <div th:if="${param.sucesso}" class="alert alert-info" role="alert">
