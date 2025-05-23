@@ -18,7 +18,13 @@ public class AuthController {
     UsuarioService service;
 
     @GetMapping
-    public String obterLogin(Model model){
+    public String obterLogin(Model model, HttpServletRequest requisicao){
+
+        // não permitir deletar após logout
+        UsuarioSessaoDTO usuarioSessaoDTO = ControleSessao.obter(requisicao);
+        if(usuarioSessaoDTO.getId() != 0){
+            ControleSessao.encerrar(requisicao);
+        }
 
         LoginDTO loginDto = new LoginDTO();
         model.addAttribute("loginDto",loginDto);

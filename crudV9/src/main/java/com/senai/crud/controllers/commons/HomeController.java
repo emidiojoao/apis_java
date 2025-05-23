@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 
     @GetMapping
-    public String obterHome(HttpServletRequest requesicao, Model model){
+    public String obterHome( Model model, HttpServletRequest requesicao){
 
         UsuarioSessaoDTO usuarioSessaoDTO = ControleSessao.obter(requesicao);
         if(usuarioSessaoDTO.getId() == 0){
